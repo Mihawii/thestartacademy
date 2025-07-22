@@ -1,103 +1,158 @@
+'use client';
+import React from "react";
+import { useEffect, useMemo, useState } from "react";
+import { motion, easeOut } from "framer-motion";
+import { MoveRight, Sticker } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { StaggerTestimonials } from "@/components/blocks/stagger-testimonials";
+import { AboutSection } from "@/components/sections/about-section";
+import { ProgramOverviewSection } from "@/components/sections/program-overview-section";
+import { ImportantDatesSection } from "@/components/sections/important-dates-section";
+import { MiniNavbar } from "@/components/ui/mini-navbar";
+
+const testimonials = [
+  {
+    author: {
+      name: "Emma Thompson",
+      handle: "@emmaai",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "Using this AI platform has transformed how we handle data analysis. The speed and accuracy are unprecedented.",
+    href: "https://twitter.com/emmaai"
+  },
+  {
+    author: {
+      name: "David Park",
+      handle: "@davidtech",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "The API integration is flawless. We've reduced our development time by 60% since implementing this solution.",
+    href: "https://twitter.com/davidtech"
+  },
+  {
+    author: {
+      name: "Sofia Rodriguez",
+      handle: "@sofiaml",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "Finally, an AI tool that actually understands context! The accuracy in natural language processing is impressive."
+  }
+];
+
+const heroContainerVariants = {
+  hidden: { opacity: 0, y: 16, filter: "blur(16px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.7,
+      ease: easeOut,
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 16, filter: "blur(16px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: easeOut } },
+};
+
+function Hero() {
+  const [titleNumber, setTitleNumber] = useState(0);
+  const titles = useMemo(
+    () => ["innovative", "real", "impactful", "reliable"],
+    []
+  );
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (titleNumber === titles.length - 1) {
+        setTitleNumber(0);
+      } else {
+        setTitleNumber(titleNumber + 1);
+      }
+    }, 2000);
+    return () => clearTimeout(timeoutId);
+  }, [titleNumber, titles]);
+
+  return (
+    <motion.div
+      className="w-full min-h-[60vh] flex flex-col items-center justify-center"
+      variants={heroContainerVariants}
+      initial="hidden"
+      animate="visible"
+      style={{ willChange: "opacity, transform, filter" }}
+    >
+      <div className="container mx-auto md:container md:mx-auto lg:container lg:mx-auto xl:container xl:mx-auto">
+        <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
+          <motion.div className="flex flex-col items-center gap-2" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
+            <Image src="/logo/logo.png" alt="The Start Academy Logo" width={48} height={48} />
+          </motion.div>
+          <motion.div className="flex flex-col items-center gap-2" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
+            <Button variant="secondary" size="sm" className="gap-4 mt-2">
+              Read our launch article <MoveRight className="w-4 h-4" />
+            </Button>
+          </motion.div>
+          <motion.div className="flex gap-4 flex-col" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
+            <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
+              <span className="text-spektr-cyan-50">The Start Academy is</span>
+              <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
+                &nbsp;
+                {titles.map((title, index) => (
+                  <motion.span
+                    key={index}
+                    className="absolute font-semibold"
+                    initial={{ opacity: 0, y: "-100" }}
+                    transition={{ type: "spring", stiffness: 50 }}
+                    animate={
+                      titleNumber === index
+                        ? {
+                            y: 0,
+                            opacity: 1,
+                          }
+                        : {
+                            y: titleNumber > index ? -150 : 150,
+                            opacity: 0,
+                          }
+                    }
+                  >
+                    {title}
+                  </motion.span>
+                ))}
+              </span>
+            </h1>
+          </motion.div>
+          <motion.div className="flex flex-col items-center" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
+            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
+              Best student career accelerator program in Central Asia.
+            </p>
+          </motion.div>
+          <motion.div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
+            <Button size="lg" className="gap-4 w-full sm:w-auto" variant="outline">
+              About us <MoveRight className="w-4 h-4" />
+            </Button>
+            <Button size="lg" className="gap-4 w-full sm:w-auto">
+              Sign up here <MoveRight className="w-4 h-4" />
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <>
+      <MiniNavbar />
+      <Hero />
+      <StaggerTestimonials />
+      <AboutSection />
+      <ProgramOverviewSection />
+      <ImportantDatesSection />
+    </>
   );
 }
