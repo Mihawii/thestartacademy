@@ -63,6 +63,7 @@ export const ProgramOverviewSection: React.FC<ProgramOverviewSectionProps> = ({ 
           </motion.div>
         ))}
       </motion.div>
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
       <p className="mt-10 text-lg md:text-xl text-muted-foreground">
         After graduation, fellows unlock exclusive opportunities—internships at US-based startups, potential seed funding, professional interview preparation, and ongoing workshops with industry leaders.
       </p>
