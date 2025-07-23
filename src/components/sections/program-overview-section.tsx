@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Meteors } from "@/components/effects/meteors";
 import { cn } from "@/lib/utils";
 
 interface ProgramOverviewSectionProps {
@@ -53,7 +54,8 @@ export const ProgramOverviewSection: React.FC<ProgramOverviewSectionProps> = ({ 
             variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
             whileHover={{ scale: 1.05 }}
           >
-            <Card className={`border backdrop-blur-md hover:shadow-lg transition-shadow bg-white/5`}>
+            <Card className="relative overflow-hidden border backdrop-blur-md hover:shadow-lg transition-shadow bg-white/5">
+                <Meteors number={15} className="pointer-events-none" />
               <CardHeader className="items-center text-center gap-2">
                 <span className="text-3xl">{emoji}</span>
                 <CardTitle>Week {week}</CardTitle>
