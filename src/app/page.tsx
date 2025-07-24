@@ -1,5 +1,4 @@
 'use client';
-import React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { motion, easeOut } from "framer-motion";
 import { Mail, Instagram, MoveRight } from "lucide-react";
@@ -12,55 +11,6 @@ import { ImportantDatesSection } from "@/components/sections/important-dates-sec
 import { FaqSection } from "@/components/sections/faq-section";
 import { MiniNavbar } from "@/components/ui/mini-navbar";
 import { SubscriptionModal } from '@/components/ui/subscription-modal';
-
-const testimonials = [
-  {
-    author: {
-      name: "Emma Thompson",
-      handle: "@emmaai",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "Using this AI platform has transformed how we handle data analysis. The speed and accuracy are unprecedented.",
-    href: "https://twitter.com/emmaai"
-  },
-  {
-    author: {
-      name: "David Park",
-      handle: "@davidtech",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "The API integration is flawless. We've reduced our development time by 60% since implementing this solution.",
-    href: "https://twitter.com/davidtech"
-  },
-  {
-    author: {
-      name: "Sofia Rodriguez",
-      handle: "@sofiaml",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
-    },
-    text: "Finally, an AI tool that actually understands context! The accuracy in natural language processing is impressive."
-  }
-];
-
-const heroContainerVariants = {
-  hidden: { opacity: 0, y: 16, filter: "none" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "none",
-    transition: {
-      duration: 0.7,
-      ease: easeOut,
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const heroItemVariants = {
-  hidden: { opacity: 0, y: 16, filter: "none" },
-  visible: { opacity: 1, y: 0, filter: "none", transition: { duration: 0.7, ease: easeOut } },
-};
 
 function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
