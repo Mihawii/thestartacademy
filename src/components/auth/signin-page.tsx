@@ -57,7 +57,8 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
       }
       
       setStep("code");
-    } catch (err: any) {
+    } catch (error) {
+      const err = error as { message?: string };
       setError(err.message || "Failed to send verification code. Please try again.");
       console.error("Email submission error:", err);
     } finally {
@@ -113,7 +114,8 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
           window.location.href = 'https://tsa-platform-r129.vercel.app';
         }, 1000);
         
-      } catch (err: any) {
+      } catch (error) {
+      const err = error as { message?: string };
         // Show error and reset code input
         setError(err.message || "Verification failed. Please try again.");
         setCode(["", "", "", "", "", ""]);
@@ -282,7 +284,7 @@ const CodeStep: React.FC<{
 
 const SuccessStep: React.FC = () => (
   <div className="space-y-6 text-center">
-    <h1 className="text-4xl font-bold text-white">You're in!</h1>
+    <h1 className="text-4xl font-bold text-white">You&apos;re in!</h1>
     <p className="text-lg text-white/60">Welcome to the dashboard</p>
     <Link
       href="/"

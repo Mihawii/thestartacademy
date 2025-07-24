@@ -11,14 +11,12 @@ interface AnimatedStatisticProps {
 }
 
 export const AnimatedStatistic = ({ value, label, plus = false }: AnimatedStatisticProps) => {
-  const ref = useRef<HTMLParagraphElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const { ref: inViewRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   // Combine refs
-  const setRefs = (node: HTMLParagraphElement) => {
-    // @ts-ignore
+  const setRefs = (node: HTMLSpanElement | null) => {
     ref.current = node;
-    // @ts-ignore
     inViewRef(node);
   };
 
