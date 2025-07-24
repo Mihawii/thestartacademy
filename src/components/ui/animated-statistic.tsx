@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useInView, useMotionValue, useSpring, animate } from 'framer-motion';
+import { useInView, animate } from 'framer-motion';
 
 interface AnimatedStatisticProps {
   value: number;
@@ -12,7 +12,6 @@ interface AnimatedStatisticProps {
 export const AnimatedStatistic = ({ value, label, plus = false }: AnimatedStatisticProps) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const motionValue = useMotionValue(0);
 
   useEffect(() => {
     if (isInView) {
