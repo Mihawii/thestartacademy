@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useState } from "react";
-import { motion, easeOut } from "framer-motion";
+import { motion } from "framer-motion";
 import { Mail, Instagram, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
