@@ -36,11 +36,11 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: 'Successfully subscribed!' }, { status: 200 });
 
-  } catch (error: any) {
-    console.error('Subscription API error:', error);
+  } catch (e: unknown) {
+    console.error('Subscription API error:', e);
 
     // Handle cases where the user might already be subscribed or other email sending issues
-    if (error.name === 'validation_error') {
+    if (e instanceof Error && e.name === 'validation_error') {
       return NextResponse.json({ error: 'Invalid email address format.' }, { status: 400 });
     }
 
