@@ -1,33 +1,33 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const SQRT_5000 = Math.sqrt(5000);
 
 // Testimonials array provided by user
 const testimonials = [
-  { tempId: 0, testimonial: "My favorite solution in the market. We work 5x faster with TSa.", by: "Alex, CEO at TechCorp", imgSrc: "https://i.pravatar.cc/150?img=1" },
-  { tempId: 1, testimonial: "I'm confident my data is safe with TSa. I can't say that about other providers.", by: "Dan, CTO at SecureNet", imgSrc: "https://i.pravatar.cc/150?img=2" },
-  { tempId: 2, testimonial: "I know it's cliche, but we were lost before we found TSa. Can't thank you guys enough!", by: "Stephanie, COO at InnovateCo", imgSrc: "https://i.pravatar.cc/150?img=3" },
-  { tempId: 3, testimonial: "TSa's products make planning for the future seamless. Can't recommend them enough!", by: "Marie, CFO at FuturePlanning", imgSrc: "https://i.pravatar.cc/150?img=4" },
-  { tempId: 4, testimonial: "If I could give 11 stars, I'd give 12.", by: "Andre, Head of Design at CreativeSolutions", imgSrc: "https://i.pravatar.cc/150?img=5" },
-  { tempId: 5, testimonial: "SO SO SO HAPPY WE FOUND YOU GUYS!!!! I'd bet you've saved me 100 hours so far.", by: "Jeremy, Product Manager at TimeWise", imgSrc: "https://i.pravatar.cc/150?img=6" },
-  { tempId: 6, testimonial: "Took some convincing, but now that we're on TSa, we're never going back.", by: "Pam, Marketing Director at BrandBuilders", imgSrc: "https://i.pravatar.cc/150?img=7" },
-  { tempId: 7, testimonial: "I would be lost without TSa's in-depth analytics. The ROI is EASILY 100X for us.", by: "Daniel, Data Scientist at AnalyticsPro", imgSrc: "https://i.pravatar.cc/150?img=8" },
-  { tempId: 8, testimonial: "It's just the best. Period.", by: "Fernando, UX Designer at UserFirst", imgSrc: "https://i.pravatar.cc/150?img=9" },
-  { tempId: 9, testimonial: "I switched 5 years ago and never looked back.", by: "Andy, DevOps Engineer at CloudMasters", imgSrc: "https://i.pravatar.cc/150?img=10" },
-  { tempId: 10, testimonial: "I've been searching for a solution like TSa for YEARS. So glad I finally found one!", by: "Pete, Sales Director at RevenueRockets", imgSrc: "https://i.pravatar.cc/150?img=11" },
-  { tempId: 11, testimonial: "It's so simple and intuitive, we got the team up to speed in 10 minutes.", by: "Marina, HR Manager at TalentForge", imgSrc: "https://i.pravatar.cc/150?img=12" },
-  { tempId: 12, testimonial: "TSa's customer support is unparalleled. They're always there when we need them.", by: "Olivia, Customer Success Manager at ClientCare", imgSrc: "https://i.pravatar.cc/150?img=13" },
-  { tempId: 13, testimonial: "The efficiency gains we've seen since implementing TSa are off the charts!", by: "Raj, Operations Manager at StreamlineSolutions", imgSrc: "https://i.pravatar.cc/150?img=14" },
-  { tempId: 14, testimonial: "TSa has revolutionized how we handle our workflow. It's a game-changer!", by: "Lila, Workflow Specialist at ProcessPro", imgSrc: "https://i.pravatar.cc/150?img=15" },
-  { tempId: 15, testimonial: "The scalability of TSa's solution is impressive. It grows with our business seamlessly.", by: "Trevor, Scaling Officer at GrowthGurus", imgSrc: "https://i.pravatar.cc/150?img=16" },
-  { tempId: 16, testimonial: "I appreciate how TSa continually innovates. They're always one step ahead.", by: "Naomi, Innovation Lead at FutureTech", imgSrc: "https://i.pravatar.cc/150?img=17" },
-  { tempId: 17, testimonial: "The ROI we've seen with TSa is incredible. It's paid for itself many times over.", by: "Victor, Finance Analyst at ProfitPeak", imgSrc: "https://i.pravatar.cc/150?img=18" },
-  { tempId: 18, testimonial: "TSa's platform is so robust, yet easy to use. It's the perfect balance.", by: "Yuki, Tech Lead at BalancedTech", imgSrc: "https://i.pravatar.cc/150?img=19" },
-  { tempId: 19, testimonial: "We've tried many solutions, but TSa stands out in terms of reliability and performance.", by: "Zoe, Performance Manager at ReliableSystems", imgSrc: "https://i.pravatar.cc/150?img=20" }
+  { tempId: 1, testimonial: "TSa showed me what's possible. My mentor was amazing.", by: "Lola I., School #64, Tashkent" },
+  { tempId: 2, testimonial: "I always had ideas, but TSa gave me the courage to pursue them. The workshops on project management were gold.", by: "Daniyar K., Lyceum #134, Almaty" },
+  { tempId: 3, testimonial: "It's more than a program; it's a community. I met so many inspiring people.", by: "Olena P., Gymnasium 'Obolon', Kyiv" },
+  { tempId: 4, testimonial: "The guidance I received was practical and honest. It helped me build a real plan for my future.", by: "Aarav N., Kendriya Vidyalaya, Mumbai" },
+  { tempId: 5, testimonial: "I finally understand what it means to build a network. Invaluable.", by: "Madina S., School #17, Samarkand" },
+  { tempId: 6, testimonial: "From a vague dream to a concrete project. That's what TSa did for me.", by: "Alikhan B., School-Lyceum #54, Nur-Sultan" },
+  { tempId: 7, testimonial: "The best part was the one-on-one mentorship. It made all the difference.", by: "Iryna V., Lviv Physics and Mathematics Lyceum, Lviv" },
+  { tempId: 8, testimonial: "I learned so much from my peers. The collaborative spirit is fantastic.", by: "Priya M., Bhavan's Vidya Mandir, Kochi" },
+  { tempId: 9, testimonial: "TSa connected me with people I'd never have met otherwise. It opened up my world.", by: "Bekzod A., Academic Lyceum, Bukhara" },
+  { tempId: 10, testimonial: "It's intense, but so rewarding. You get out what you put in.", by: "Kateryna S., Richelieu Lyceum, Odesa" },
+  { tempId: 11, testimonial: "My confidence grew so much. I feel ready to take on new challenges.", by: "Nikhil J., Bishop Cotton Boys' School, Bangalore" },
+  { tempId: 12, testimonial: "This program helped me think bigger.", by: "Gaukhar E., Gymnasium #25, Shymkent" },
+  { tempId: 13, testimonial: "The workshops are top-notch. I learned skills I'm already using.", by: "Sanjar T., Presidential School, Namangan" },
+  { tempId: 14, testimonial: "A truly transformative experience.", by: "Aditi R., La Martiniere for Girls, Kolkata" },
+  { tempId: 15, testimonial: "I wasn't sure what to expect, but it exceeded all my hopes. The support is incredible.", by: "Yaroslav H., Polytechnic Lyceum 'KPI', Kyiv" },
+  { tempId: 16, testimonial: "My mentor pushed me to be better, and I'm so grateful for it.", by: "Aruzhan Z., Republican Physics and Mathematics School, Almaty" },
+  { tempId: 17, testimonial: "Just do it. You won't regret it.", by: "Fatima Y., International School, Tashkent" },
+  { tempId: 18, testimonial: "The focus on real-world skills is exactly what I needed.", by: "Ravi K., The Doon School, Dehradun" },
+  { tempId: 19, testimonial: "It helped me find clarity in what I want to do after school.", by: "Anastasiia M., Natural Sciences Lyceum #145, Kyiv" },
+  { tempId: 20, testimonial: "An amazing network of mentors and peers. So glad I joined.", by: "Sultan N., Lyceum 'Bilim-Innovation', Karaganda" }
 ];
 
 interface TestimonialCardProps {
@@ -59,14 +59,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ position, testimonial
         className="absolute block origin-top-right rotate-45 bg-border"
         style={{ right: -2, top: 48, width: SQRT_5000, height: 2 }}
       />
-      <img
-        src={testimonial.imgSrc}
-        alt={testimonial.by.split(",")[0]}
-        className="mb-4 h-14 w-12 bg-muted object-cover object-top"
-        style={{ boxShadow: "3px 3px 0px hsl(var(--background))" }}
-      />
-      <h3 className={cn("text-base sm:text-xl font-medium", isCenter ? "text-primary-foreground" : "text-foreground")}>&ldquo;{testimonial.testimonial}&rdquo;</h3>
-      <p className={cn("absolute bottom-8 left-8 right-8 mt-2 text-sm italic", isCenter ? "text-primary-foreground/80" : "text-muted-foreground")}>- {testimonial.by}</p>
+      <div className="flex h-full flex-col items-center justify-center">
+        <Quote className={cn("h-8 w-8", isCenter ? "text-primary-foreground/50" : "text-muted-foreground/50")} />
+        <h3 className={cn("mt-4 text-base sm:text-xl font-medium text-center", isCenter ? "text-primary-foreground" : "text-foreground")}>&ldquo;{testimonial.testimonial}&rdquo;</h3>
+      </div>
+      <p className={cn("absolute bottom-8 left-8 right-8 mt-2 text-sm italic text-center", isCenter ? "text-primary-foreground/80" : "text-muted-foreground")}>- {testimonial.by}</p>
     </div>
   );
 };

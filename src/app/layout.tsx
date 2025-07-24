@@ -1,4 +1,3 @@
-
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,6 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 import type { Metadata, Viewport } from "next";
+import { MiniNavbar } from "../components/ui/mini-navbar";
+import { PageLoader } from '@/components/ui/page-loader';
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -30,11 +31,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <PageLoader>
+          <MiniNavbar />
+          {children}
+        </PageLoader>
       </body>
     </html>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState, KeyboardEvent } from "react";
 import { motion } from "framer-motion";
 import { MoveRight, Sticker } from "lucide-react";
 import { Button } from "./button";
+import Link from "next/link";
 
 const titles = ["amazing", "new", "wonderful", "beautiful", "smart"];
 
@@ -59,28 +60,30 @@ const Hero: React.FC = () => {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <Button
-              size="lg"
-              className="gap-4 w-full sm:w-auto transition-transform duration-200 hover:scale-105 active:scale-95"
-              variant="default"
-              aria-label="About us"
-              tabIndex={0}
-              onClick={() => window.open('#about', '_self')}
-              onKeyDown={(e) => handleKeyDown(e, () => window.open('#about', '_self'))}
-            >
-              <Sticker className="w-4 h-4" aria-hidden="true" /> About us
-            </Button>
-            <Button
-              size="lg"
-              className="gap-4 transition-transform duration-200 hover:scale-105 active:scale-95 hover:bg-spektr-blue-50 hover:text-spektr-white"
-              variant="secondary"
-              aria-label="Sign up here"
-              tabIndex={0}
-              onClick={() => window.open('#signup', '_self')}
-              onKeyDown={(e) => handleKeyDown(e, () => window.open('#signup', '_self'))}
-            >
-              Sign up here <MoveRight className="w-4 h-4" aria-hidden="true" />
-            </Button>
+            <Link href="#about" passHref>
+              <Button
+                asChild
+                size="lg"
+                className="gap-4 w-full sm:w-auto transition-transform duration-200 hover:scale-105 active:scale-95"
+                variant="default"
+                aria-label="About us"
+                tabIndex={0}
+              >
+                <span><Sticker className="w-4 h-4" aria-hidden="true" /> About us</span>
+              </Button>
+            </Link>
+            <Link href="/auth" passHref>
+              <Button
+                asChild
+                size="lg"
+                className="gap-4 transition-all duration-200 hover:scale-105 active:scale-95 bg-transparent text-white/90 border border-white/30 hover:border-white/60 hover:bg-white/10 backdrop-blur-sm"
+                variant="ghost"
+                aria-label="Log in"
+                tabIndex={0}
+              >
+                <span>Log in <MoveRight className="w-4 h-4 inline" aria-hidden="true" /></span>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

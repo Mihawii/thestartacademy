@@ -2,14 +2,16 @@
 import React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { motion, easeOut } from "framer-motion";
-import { MoveRight, Sticker } from "lucide-react";
+import { Mail, Instagram, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { StaggerTestimonials } from "@/components/blocks/stagger-testimonials";
 import { AboutSection } from "@/components/sections/about-section";
 import { ProgramOverviewSection } from "@/components/sections/program-overview-section";
 import { ImportantDatesSection } from "@/components/sections/important-dates-section";
+import { FaqSection } from "@/components/sections/faq-section";
 import { MiniNavbar } from "@/components/ui/mini-navbar";
+import { SubscriptionModal } from '@/components/ui/subscription-modal';
 
 const testimonials = [
   {
@@ -41,11 +43,11 @@ const testimonials = [
 ];
 
 const heroContainerVariants = {
-  hidden: { opacity: 0, y: 16, filter: "blur(16px)" },
+  hidden: { opacity: 0, y: 16, filter: "none" },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
+    filter: "none",
     transition: {
       duration: 0.7,
       ease: easeOut,
@@ -56,11 +58,12 @@ const heroContainerVariants = {
 };
 
 const heroItemVariants = {
-  hidden: { opacity: 0, y: 16, filter: "blur(16px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: easeOut } },
+  hidden: { opacity: 0, y: 16, filter: "none" },
+  visible: { opacity: 1, y: 0, filter: "none", transition: { duration: 0.7, ease: easeOut } },
 };
 
 function Hero() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
     () => ["innovative", "real", "impactful", "reliable"],
@@ -81,22 +84,41 @@ function Hero() {
   return (
     <motion.div
       className="w-full min-h-[60vh] flex flex-col items-center justify-center"
-      variants={heroContainerVariants}
-      initial="hidden"
-      animate="visible"
+      
+      
       style={{ willChange: "opacity, transform, filter" }}
     >
       <div className="container mx-auto md:container md:mx-auto lg:container lg:mx-auto xl:container xl:mx-auto">
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
-          <motion.div className="flex flex-col items-center gap-2" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
+          <motion.div className="flex flex-col items-center gap-2" style={{ willChange: "opacity, transform, filter" }}>
             <Image src="/logo/logo.png" alt="The Start Academy Logo" width={48} height={48} />
           </motion.div>
-          <motion.div className="flex flex-col items-center gap-2" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
-            <Button variant="secondary" size="sm" className="gap-4 mt-2">
-              Read our launch article <MoveRight className="w-4 h-4" />
-            </Button>
+          <motion.div className="flex flex-col items-center gap-4 mt-2" style={{ willChange: "opacity, transform, filter" }}>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a 
+                href="https://www.instagram.com/thestartacademy?igsh=bWRlbTYxb25vMDdn" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-white/10 hover:bg-white/20 transition-colors text-white"
+              >
+                <Instagram className="w-4 h-4" />
+                @thestartacademy
+              </a>
+              <a 
+                href="mailto:contact@thestartacademy.com" 
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-white/10 hover:bg-white/20 transition-colors text-white"
+              >
+                <Mail className="w-4 h-4" />
+                contact@thestartacademy.com
+              </a>
+            </div>
           </motion.div>
-          <motion.div className="flex gap-4 flex-col" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
+          <motion.div
+            className="flex gap-4 flex-col"
+            initial={{ opacity: 1, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+           style={{ willChange: "opacity, transform, filter" }}>
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-spektr-cyan-50">The Start Academy is</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
@@ -125,21 +147,29 @@ function Hero() {
               </span>
             </h1>
           </motion.div>
-          <motion.div className="flex flex-col items-center" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
+          <motion.div className="flex flex-col items-center" style={{ willChange: "opacity, transform, filter" }}>
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
               Best student career accelerator program in Central Asia.
             </p>
           </motion.div>
-          <motion.div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto" variants={heroItemVariants} style={{ willChange: "opacity, transform, filter" }}>
-            <Button size="lg" className="gap-4 w-full sm:w-auto" variant="outline">
+          <motion.div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto" style={{ willChange: "opacity, transform, filter" }}>
+            <a
+              href="#about"
+              className="inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-medium transition-colors rounded-md whitespace-nowrap bg-background hover:bg-accent hover:text-accent-foreground h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input"
+            >
               About us <MoveRight className="w-4 h-4" />
-            </Button>
-            <Button size="lg" className="gap-4 w-full sm:w-auto">
+            </a>
+            <Button
+              size="lg"
+              className="gap-4 w-full sm:w-auto transition-transform duration-200 hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-white/70"
+              onClick={() => setIsModalOpen(true)}
+            >
               Sign up here <MoveRight className="w-4 h-4" />
             </Button>
           </motion.div>
         </div>
       </div>
+      <SubscriptionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </motion.div>
   );
 }
@@ -153,6 +183,7 @@ export default function Home() {
       <AboutSection />
       <ProgramOverviewSection />
       <ImportantDatesSection />
+      <FaqSection />
     </>
   );
 }

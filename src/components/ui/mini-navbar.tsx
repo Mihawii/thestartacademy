@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 import Image from "next/image";
+
 
 const AnimatedNavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   return (
@@ -47,7 +50,9 @@ export function MiniNavbar() {
   }, [isOpen]);
 
   const logo = (
-    <Image src="/logo/logo.png" alt="Logo" width={32} height={32} className="rounded-full" />
+    <Link href="/" aria-label="Home" className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
+      <Image src="/logo/logo.png" alt="Logo" width={40} height={40} priority placeholder="empty" className="rounded-full hover:scale-105 transition-transform duration-200" />
+    </Link>
   );
 
   const navLinks = [
@@ -56,20 +61,24 @@ export function MiniNavbar() {
     { label: "Dates", href: "#dates" },
   ];
 
-  const loginBtn = (
-    <button className="px-4 py-2 text-xs border border-[#333] bg-[rgba(31,31,31,0.62)] text-gray-300 rounded-full hover:border-white/50 hover:text-white transition-colors duration-200 transform hover:scale-105 active:scale-95 w-full sm:w-auto">
-      Log In
-    </button>
+  const AuthLink = ({ label }: { label: string }) => (
+    <a
+      href="/auth"
+      className={cn(
+        "relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70",
+        "bg-transparent text-white/90 border border-white/30 hover:border-white/60 hover:bg-white/10 backdrop-blur-sm"
+      )}
+    >
+      Log in
+    </a>
   );
 
-  const signupBtn = (
-    <div className="relative group w-full sm:w-auto">
-      <div className="absolute inset-0 -m-2 rounded-full hidden sm:block bg-gray-100 opacity-40 blur-lg pointer-events-none transition-all duration-300 group-hover:opacity-60 group-hover:blur-xl group-hover:-m-3" />
-      <button className="relative z-10 px-4 py-2 text-xs font-semibold text-black bg-gradient-to-br from-gray-100 to-gray-300 rounded-full hover:from-gray-200 hover:to-gray-400 transition-all duration-200 transform hover:scale-105 active:scale-95 w-full sm:w-auto">
-        Signup
-      </button>
-    </div>
+  const signInBtn = (
+    <Link href="/access-info" className="text-sm text-gray-300 hover:text-white transition-colors duration-200">
+      Sign In
+    </Link>
   );
+  const registerBtn = <AuthLink label="Register" />;
 
   return (
     <header
@@ -88,9 +97,9 @@ export function MiniNavbar() {
             </AnimatedNavLink>
           ))}
         </nav>
-        <div className="hidden sm:flex items-center gap-3">
-          {loginBtn}
-          {signupBtn}
+        <div className="flex items-center gap-x-4">
+          {signInBtn}
+          {registerBtn}
         </div>
         <button
           className="sm:hidden flex items-center justify-center w-8 h-8 text-gray-300 focus:outline-none"
@@ -123,10 +132,10 @@ export function MiniNavbar() {
             </a>
           ))}
         </nav>
-        <div className="flex flex-col items-center space-y-4 mt-4 w-full">
-          {loginBtn}
-          {signupBtn}
-        </div>
+        <div className="mt-6 flex flex-col items-center gap-y-4">
+            {signInBtn}
+            {registerBtn}
+          </div>
       </div>
     </header>
   );
