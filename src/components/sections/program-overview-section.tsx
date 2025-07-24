@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -26,23 +27,27 @@ export const ProgramOverviewSection: React.FC<ProgramOverviewSectionProps> = ({ 
             week: 1,
             title: 'Foundations of Business & Entrepreneurship',
             desc: 'Market research, problem-solution fit, lean validation.',
+            emoji: '💡',
           },
           {
             week: 2,
             title: 'Brand Management & CSR',
             desc: 'Positioning, pricing, storytelling, social impact.',
+            emoji: '🎯',
           },
           {
             week: 3,
             title: 'Project Management',
             desc: 'Agile frameworks, roadmap planning, execution tracking.',
+            emoji: '📈',
           },
           {
             week: 4,
             title: 'Pitch Prep',
             desc: 'Deck crafting, investor storytelling, demo-day rehearsal.',
+            emoji: '🎤',
           },
-        ].map(({ week, title, desc }) => (
+        ].map(({ week, title, desc, emoji }) => (
           <motion.div
             key={week}
             variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
@@ -58,6 +63,7 @@ export const ProgramOverviewSection: React.FC<ProgramOverviewSectionProps> = ({ 
           </motion.div>
         ))}
       </motion.div>
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
       <p className="mt-10 text-lg md:text-xl text-muted-foreground">
         After graduation, fellows unlock exclusive opportunities—internships at US-based startups, potential seed funding, professional interview preparation, and ongoing workshops with industry leaders.
       </p>

@@ -22,6 +22,9 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
   const [step, setStep] = useState<"email" | "code" | "success">("email");
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const codeInputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const [initialCanvasVisible, setInitialCanvasVisible] = useState(true);
+  const [reverseCanvasVisible, setReverseCanvasVisible] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -54,9 +57,8 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
       }
       
       setStep("code");
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "An unknown error occurred";
-      setError(message || "Failed to send verification code. Please try again.");
+    } catch (err: any) {
+      setError(err.message || "Failed to send verification code. Please try again.");
       console.error("Email submission error:", err);
     } finally {
       setLoading(false);
@@ -102,6 +104,8 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
         }
         
         // Show success state
+        setReverseCanvasVisible(true);
+        setTimeout(() => setInitialCanvasVisible(false), 50);
         setStep("success");
         
         // Redirect after a short delay to show success message
@@ -109,10 +113,9 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
           window.location.href = 'https://tsa-platform-r129.vercel.app';
         }, 1000);
         
-      } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : "An unknown error occurred";
+      } catch (err: any) {
         // Show error and reset code input
-        setError(message || "Verification failed. Please try again.");
+        setError(err.message || "Verification failed. Please try again.");
         setCode(["", "", "", "", "", ""]);
         setTimeout(() => codeInputRefs.current[0]?.focus(), 100);
         console.error("Verification error:", err);
@@ -131,7 +134,8 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
   const handleBack = () => {
     setStep("email");
     setCode(["", "", "", "", "", ""]);
-
+    setInitialCanvasVisible(true);
+    setReverseCanvasVisible(false);
   };
 
   return (
@@ -151,28 +155,21 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
             {step === "email" && (
               <motion.div
                 key="email"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.3 }}
                 className="w-full flex justify-center"
               >
-                <EmailStep
-                  email={email}
-                  setEmail={setEmail}
-                  onSubmit={handleEmailSubmit}
-                  onGoogleSignIn={() => signIn("google")}
-                  loading={loading}
-                  error={error}
-                />
+                <EmailStep email={email} setEmail={setEmail} onSubmit={handleEmailSubmit} onGoogleSignIn={() => signIn('google')} />
               </motion.div>
             )}
             {step === "code" && (
               <motion.div
                 key="code"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.3 }}
                 className="w-full flex justify-center"
               >
@@ -182,18 +179,16 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
                   onChange={handleCodeChange}
                   onKeyDown={handleKeyDown}
                   onBack={handleBack}
-                  loading={loading}
-                  error={error}
                 />
               </motion.div>
             )}
             {step === "success" && (
               <motion.div
                 key="success"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
                 className="w-full flex justify-center"
               >
                 <SuccessStep />
@@ -213,9 +208,7 @@ const EmailStep: React.FC<{
   email: string;
   setEmail: (v: string) => void;
   onSubmit: (e: React.FormEvent) => void;
-  loading: boolean;
-  error: string | null;
-}> = ({ email, setEmail, onSubmit, onGoogleSignIn, loading, error }) => (
+}> = ({ email, setEmail, onSubmit, onGoogleSignIn }) => (
   <form onSubmit={onSubmit} className="w-full max-w-sm space-y-6 text-center">
     <div className="space-y-1">
       <h1 className="text-4xl font-bold tracking-tight text-white">Welcome</h1>
@@ -229,13 +222,11 @@ const EmailStep: React.FC<{
       required
       className="w-full backdrop-blur text-white border border-white/10 rounded-full py-3 px-4 focus:outline-none focus:border-white/30 text-center bg-white/5"
     />
-    {error && <p className="text-sm text-red-400">{error}</p>}
     <button
-      className="w-full rounded-full bg-white text-black py-3 font-medium hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-full rounded-full bg-white text-black py-3 font-medium hover:bg-white/90 transition-colors"
       type="submit"
-      disabled={loading}
     >
-      {loading ? "Sending..." : "Continue →"}
+      Continue →
     </button>
     <div className="relative my-4">
       <div className="absolute inset-0 flex items-center">
@@ -264,9 +255,7 @@ const CodeStep: React.FC<{
   onChange: (i: number, v: string) => void;
   onKeyDown: (i: number, e: React.KeyboardEvent<HTMLInputElement>) => void;
   onBack: () => void;
-  loading: boolean;
-  error: string | null;
-}> = ({ code, refs, onChange, onKeyDown, onBack, loading, error }) => (
+}> = ({ code, refs, onChange, onKeyDown, onBack }) => (
   <div className="w-full max-w-sm space-y-6 text-center">
     <h1 className="text-3xl font-bold text-white">Enter the code</h1>
     <div className="flex justify-center gap-2">
@@ -278,13 +267,10 @@ const CodeStep: React.FC<{
           value={d}
           onChange={(e) => onChange(i, e.target.value)}
           onKeyDown={(e) => onKeyDown(i, e)}
-          disabled={loading}
-          className="w-10 h-12 text-center text-xl bg-transparent border-b border-white/30 text-white focus:outline-none disabled:opacity-50"
+          className="w-10 h-12 text-center text-xl bg-transparent border-b border-white/30 text-white focus:outline-none"
         />
       ))}
     </div>
-    {error && <p className="text-sm text-red-400">{error}</p>}
-    {loading && <p className="text-sm text-white/60">Verifying...</p>}
     <button
       onClick={onBack}
       className="text-sm text-white/60 underline-offset-4 hover:text-white"
@@ -296,7 +282,7 @@ const CodeStep: React.FC<{
 
 const SuccessStep: React.FC = () => (
   <div className="space-y-6 text-center">
-    <h1 className="text-4xl font-bold text-white">You&apos;re in!</h1>
+    <h1 className="text-4xl font-bold text-white">You're in!</h1>
     <p className="text-lg text-white/60">Welcome to the dashboard</p>
     <Link
       href="/"

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -69,7 +69,7 @@ export function MiniNavbar() {
         "bg-transparent text-white/90 border border-white/30 hover:border-white/60 hover:bg-white/10 backdrop-blur-sm"
       )}
     >
-      {label}
+      Log in
     </a>
   );
 

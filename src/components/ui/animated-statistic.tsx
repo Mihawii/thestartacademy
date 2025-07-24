@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
 import { useEffect, useRef } from 'react';
-import { useInView, animate } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { animate } from 'framer-motion';
 
 interface AnimatedStatisticProps {
   value: number;
@@ -10,30 +11,39 @@ interface AnimatedStatisticProps {
 }
 
 export const AnimatedStatistic = ({ value, label, plus = false }: AnimatedStatisticProps) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const ref = useRef<HTMLParagraphElement>(null);
+  const { ref: inViewRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  // Combine refs
+  const setRefs = (node: HTMLParagraphElement) => {
+    // @ts-ignore
+    ref.current = node;
+    // @ts-ignore
+    inViewRef(node);
+  };
 
   useEffect(() => {
-    if (isInView) {
-      animate(0, value, {
+    if (inView && ref.current) {
+      const controls = animate(0, value, {
         duration: 2,
         ease: 'easeOut',
-        onUpdate: (latest) => {
+        onUpdate(value) {
           if (ref.current) {
-            ref.current.textContent = latest.toFixed(0);
+            ref.current.textContent = Math.round(value).toString();
           }
         },
       });
+      return () => controls.stop();
     }
-  }, [isInView, value]);
+  }, [inView, value]);
 
   return (
     <div className="text-center">
-      <p className="text-4xl md:text-5xl font-bold text-white">
-        <span ref={ref}>0</span>
+      <p className="text-4xl md:text-5xl font-bold text-foreground">
+        <span ref={setRefs}>0</span>
         {plus && '+'}
       </p>
-      <p className="text-sm md:text-base text-gray-400 mt-2 max-w-xs mx-auto">{label}</p>
+      <p className="text-sm md:text-base text-muted-foreground mt-2 max-w-xs mx-auto">{label}</p>
     </div>
   );
 };

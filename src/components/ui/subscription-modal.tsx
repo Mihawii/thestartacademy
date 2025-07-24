@@ -2,7 +2,7 @@
 // 'use client';
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './button';
 import { Input } from './input';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,7 +18,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     onClose();
     // Delay state reset to allow for exit animation
     setTimeout(() => {
@@ -27,7 +27,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
       setError(null);
       setSuccess(false);
     }, 300);
-  }, [onClose]);
+  };
 
   const handleSubscribe = async () => {
     if (!email || !email.includes('@')) {
@@ -54,12 +54,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
       setSuccess(true);
       setTimeout(handleClose, 2000); // Auto-close on success
 
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('An unknown error occurred');
-      }
+    } catch (err: any) {
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
@@ -75,7 +71,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
     return () => {
       window.removeEventListener('keydown', handleEsc);
     };
-  }, [handleClose]);
+  }, [onClose]);
 
   return (
     <AnimatePresence>
@@ -98,7 +94,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
             {success ? (
               <div className="text-center">
                 <h3 className="text-2xl font-semibold mb-2">Thank You!</h3>
-                <p className="text-neutral-400">You&apos;re on the list. We&apos;ll be in touch.</p>
+                <p className="text-neutral-400">You're on the list. We'll be in touch.</p>
               </div>
             ) : (
               <div className="text-center">

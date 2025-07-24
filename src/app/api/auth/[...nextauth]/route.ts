@@ -11,7 +11,7 @@ declare module "next-auth" {
   }
 }
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
@@ -22,7 +22,7 @@ const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" as const },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, account, profile, email, credentials }) {
       if (!user.email) return false;
       
       // Check if the user's email is in the allowed students list

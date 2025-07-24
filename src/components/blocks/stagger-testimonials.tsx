@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const SQRT_5000 = Math.sqrt(5000);
 
 // Testimonials array provided by user
 const testimonials = [
@@ -38,42 +39,32 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ position, testimonial, handleMove, cardSize }) => {
   const isCenter = position === 0;
-  const scale = 1 - Math.abs(position) * 0.15;
-  const opacity = 1 - Math.abs(position) * 0.3;
-  const x = (cardSize / 1.5) * position;
 
   return (
-    <motion.div
+    <div
       onClick={() => handleMove(position)}
       className={cn(
-        "absolute left-1/2 top-1/2 cursor-pointer rounded-xl border-2 p-6",
-        isCenter
-          ? "border-primary bg-zinc-900/90 text-white shadow-2xl backdrop-blur-md"
-          : "border-white/20 bg-white/5 text-card-foreground shadow-md backdrop-blur-sm hover:border-primary/50"
+        "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 overflow-hidden transition-all duration-500 ease-in-out",
+        isCenter ? "z-10 bg-zinc-900/90 text-white border-primary shadow-lg backdrop-blur-md" : "z-0 bg-white/10 backdrop-blur-md text-card-foreground border-white/20 hover:border-primary/50 shadow-sm"
       )}
-      initial={false} // Prevent animation on initial render
-      animate={{
-        x: `calc(-50% + ${x}px)`,
-        y: "-50%",
-        scale: scale,
-        opacity: opacity,
-        zIndex: isCenter ? 10 : 0,
+      style={{
+        width: cardSize,
+        height: cardSize,
+        clipPath: `polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0)`,
+        transform: `translate(-50%, -50%) translateX(${(cardSize / 1.5) * position}px) translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px) rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)`,
+        boxShadow: isCenter ? "0px 8px 0px 4px hsl(var(--border))" : "0px 0px 0px 0px transparent",
       }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      style={{ width: cardSize, height: cardSize }}
     >
-      <div className="flex h-full flex-col justify-between">
-        <Quote className={cn("h-8 w-8 shrink-0", isCenter ? "text-primary-foreground/50" : "text-muted-foreground/50")} />
-        <div className="flex-grow flex items-center">
-          <h3 className={cn("text-base font-medium text-center leading-relaxed", isCenter ? "text-primary-foreground" : "text-foreground")}>
-            &ldquo;{testimonial.testimonial}&rdquo;
-          </h3>
-        </div>
-        <p className={cn("mt-4 text-sm italic text-center", isCenter ? "text-primary-foreground/80" : "text-muted-foreground")}>
-          - {testimonial.by}
-        </p>
+      <span
+        className="absolute block origin-top-right rotate-45 bg-border"
+        style={{ right: -2, top: 48, width: SQRT_5000, height: 2 }}
+      />
+      <div className="flex h-full flex-col items-center justify-center">
+        <Quote className={cn("h-8 w-8", isCenter ? "text-primary-foreground/50" : "text-muted-foreground/50")} />
+        <h3 className={cn("mt-4 text-base sm:text-xl font-medium text-center", isCenter ? "text-primary-foreground" : "text-foreground")}>&ldquo;{testimonial.testimonial}&rdquo;</h3>
       </div>
-    </motion.div>
+      <p className={cn("absolute bottom-8 left-8 right-8 mt-2 text-sm italic text-center", isCenter ? "text-primary-foreground/80" : "text-muted-foreground")}>- {testimonial.by}</p>
+    </div>
   );
 };
 
@@ -84,14 +75,16 @@ export const StaggerTestimonials: React.FC = () => {
   const handleMove = (steps: number) => {
     const newList = [...testimonialsList];
     if (steps > 0) {
-      for (let i = 0; i < steps; i++) {
-        const first = newList.shift();
-        if (first) newList.push(first);
+      for (let i = steps; i > 0; i--) {
+        const item = newList.shift();
+        if (!item) return;
+        newList.push({ ...item, tempId: Math.random() });
       }
     } else {
-      for (let i = 0; i > steps; i--) {
-        const last = newList.pop();
-        if (last) newList.unshift(last);
+      for (let i = steps; i < 0; i++) {
+        const item = newList.pop();
+        if (!item) return;
+        newList.unshift({ ...item, tempId: Math.random() });
       }
     }
     setTestimonialsList(newList);
@@ -120,7 +113,7 @@ export const StaggerTestimonials: React.FC = () => {
         <button
           onClick={() => handleMove(-1)}
           className={cn(
-            "flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-transform transition-colors duration-200 hover:scale-110 active:scale-95 hover:shadow-lg hover:shadow-primary/60",
+            "flex h-14 w-14 items-center justify-center text-2xl transition-transform transition-colors duration-200 hover:scale-110 active:scale-95 hover:shadow-lg hover:shadow-primary/60",
             "bg-background border-2 border-border hover:bg-primary hover:text-primary-foreground",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           )}
@@ -131,7 +124,7 @@ export const StaggerTestimonials: React.FC = () => {
         <button
           onClick={() => handleMove(1)}
           className={cn(
-            "flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-transform transition-colors duration-200 hover:scale-110 active:scale-95 hover:shadow-lg hover:shadow-primary/60",
+            "flex h-14 w-14 items-center justify-center text-2xl transition-transform transition-colors duration-200 hover:scale-110 active:scale-95 hover:shadow-lg hover:shadow-primary/60",
             "bg-background border-2 border-border hover:bg-primary hover:text-primary-foreground",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           )}

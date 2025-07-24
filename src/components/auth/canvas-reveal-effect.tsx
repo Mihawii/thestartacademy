@@ -44,7 +44,7 @@ export const CanvasRevealEffect: React.FC<CanvasRevealEffectProps> = ({
     let t = 0;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const MAX_DURATION = 6000; // ms
-    const startTime = performance.now();
+    let startTime = performance.now();
     const FPS = 30;
     // fade container in and out
     if (containerRef.current) {

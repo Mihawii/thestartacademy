@@ -1,4 +1,5 @@
-import React, { useEffect, useState, KeyboardEvent } from "react";
+import React, { useEffect, useMemo, useState, KeyboardEvent } from "react";
+import { motion } from "framer-motion";
 import { MoveRight, Sticker } from "lucide-react";
 import { Button } from "./button";
 import Link from "next/link";
