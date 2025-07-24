@@ -11,7 +11,7 @@ declare module "next-auth" {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
