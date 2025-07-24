@@ -151,9 +151,9 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
             {step === "email" && (
               <motion.div
                 key="email"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
                 className="w-full flex justify-center"
               >
@@ -170,9 +170,9 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
             {step === "code" && (
               <motion.div
                 key="code"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
                 className="w-full flex justify-center"
               >
@@ -190,10 +190,10 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
             {step === "success" && (
               <motion.div
                 key="success"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
                 className="w-full flex justify-center"
               >
                 <SuccessStep />
