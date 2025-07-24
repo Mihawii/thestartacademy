@@ -131,8 +131,7 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
   const handleBack = () => {
     setStep("email");
     setCode(["", "", "", "", "", ""]);
-    setInitialCanvasVisible(true);
-    setReverseCanvasVisible(false);
+
   };
 
   return (

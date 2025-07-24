@@ -2,7 +2,7 @@
 // 'use client';
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from './button';
 import { Input } from './input';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,7 +18,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     onClose();
     // Delay state reset to allow for exit animation
     setTimeout(() => {
@@ -27,7 +27,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
       setError(null);
       setSuccess(false);
     }, 300);
-  };
+  }, [onClose]);
 
   const handleSubscribe = async () => {
     if (!email || !email.includes('@')) {
