@@ -13,7 +13,7 @@ const faqData: FaqItem[] = [
     q: "What makes Start Academy different from other student business programs?",
     a: (
       <p>
-        It's 100% practical, hands-on, and built around real-world outcomes—not just
+        It&apos;s 100% practical, hands-on, and built around real-world outcomes—not just
         lectures.
       </p>
     ),
@@ -46,7 +46,7 @@ const faqData: FaqItem[] = [
     q: "Will I actually build something real during the program?",
     a: (
       <p>
-        Yes. You'll create and pitch your own project by the end.
+        Yes. You&apos;ll create and pitch your own project by the end.
       </p>
     ),
   },
@@ -70,7 +70,7 @@ const faqData: FaqItem[] = [
     q: "Is this program more about theory or real-world practice?",
     a: (
       <p>
-        Way more about practice. You'll learn by doing.
+        Way more about practice. You&apos;ll learn by doing.
       </p>
     ),
   },
