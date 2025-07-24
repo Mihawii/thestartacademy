@@ -12,6 +12,7 @@ import { ImportantDatesSection } from "@/components/sections/important-dates-sec
 import { FaqSection } from "@/components/sections/faq-section";
 import { MiniNavbar } from "@/components/ui/mini-navbar";
 import { SubscriptionModal } from '@/components/ui/subscription-modal';
+import ErrorBoundary from "@/components/ui/error-boundary";
 
 const testimonials = [
   {
@@ -180,7 +181,7 @@ function Hero() {
 
 export default function Home() {
   return (
-    <>
+    <ErrorBoundary>
       <MiniNavbar />
       <Hero />
       <StaggerTestimonials />
@@ -188,6 +189,6 @@ export default function Home() {
       <ProgramOverviewSection />
       <ImportantDatesSection />
       <FaqSection />
-    </>
+    </ErrorBoundary>
   );
 }
