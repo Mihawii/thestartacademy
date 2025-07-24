@@ -5,10 +5,12 @@ import { Mail, Instagram, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { StaggerTestimonials } from "@/components/blocks/stagger-testimonials";
-import { AboutSection } from "@/components/sections/about-section";
-import { ProgramOverviewSection } from "@/components/sections/program-overview-section";
-import { ImportantDatesSection } from "@/components/sections/important-dates-section";
-import { FaqSection } from "@/components/sections/faq-section";
+import dynamic from 'next/dynamic';
+
+const AboutSection = dynamic(() => import('@/components/sections/about-section').then(mod => mod.AboutSection));
+const ProgramOverviewSection = dynamic(() => import('@/components/sections/program-overview-section').then(mod => mod.ProgramOverviewSection));
+const ImportantDatesSection = dynamic(() => import('@/components/sections/important-dates-section').then(mod => mod.ImportantDatesSection));
+const FaqSection = dynamic(() => import('@/components/sections/faq-section').then(mod => mod.FaqSection));
 import { MiniNavbar } from "@/components/ui/mini-navbar";
 import { SubscriptionModal } from '@/components/ui/subscription-modal';
 
@@ -34,16 +36,26 @@ function Hero() {
   return (
     <motion.div
       className="w-full min-h-[60vh] flex flex-col items-center justify-center"
-      
-      
-      style={{ willChange: "opacity, transform, filter" }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="container mx-auto md:container md:mx-auto lg:container lg:mx-auto xl:container xl:mx-auto">
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
-          <motion.div className="flex flex-col items-center gap-2" style={{ willChange: "opacity, transform, filter" }}>
+          <motion.div 
+            className="flex flex-col items-center gap-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
+          >
             <Image src="/logo/logo.png" alt="The Start Academy Logo" width={48} height={48} />
           </motion.div>
-          <motion.div className="flex flex-col items-center gap-4 mt-2" style={{ willChange: "opacity, transform, filter" }}>
+          <motion.div 
+            className="flex flex-col items-center gap-4 mt-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+          >
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
                 href="https://www.instagram.com/thestartacademy?igsh=bWRlbTYxb25vMDdn" 
@@ -65,10 +77,10 @@ function Hero() {
           </motion.div>
           <motion.div
             className="flex gap-4 flex-col"
-            initial={{ opacity: 1, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-           style={{ willChange: "opacity, transform, filter" }}>
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+          >
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-spektr-cyan-50">The Start Academy is</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
@@ -97,12 +109,22 @@ function Hero() {
               </span>
             </h1>
           </motion.div>
-          <motion.div className="flex flex-col items-center" style={{ willChange: "opacity, transform, filter" }}>
+          <motion.div 
+            className="flex flex-col items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+          >
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
               Best student career accelerator program in Central Asia.
             </p>
           </motion.div>
-          <motion.div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto" style={{ willChange: "opacity, transform, filter" }}>
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+          >
             <a
               href="#about"
               className="inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-medium transition-colors rounded-md whitespace-nowrap bg-background hover:bg-accent hover:text-accent-foreground h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input"

@@ -13,7 +13,6 @@ const geistMono = Geist_Mono({
 
 import type { Metadata, Viewport } from "next";
 import { MiniNavbar } from "../components/ui/mini-navbar";
-import { PageLoader } from '@/components/ui/page-loader';
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -35,10 +34,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PageLoader>
           <MiniNavbar />
           {children}
-        </PageLoader>
       </body>
     </html>
   );

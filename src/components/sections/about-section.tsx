@@ -29,15 +29,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ className }) => (
         {/* Qualitative Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-x-8 items-start">
           <div className="flex flex-col items-center text-center">
-            <div className="w-36 h-36 flex items-center justify-center mb-4">
-              <Image src="/logo/stanford.svg" alt="Stanford Logo" width={240} height={240} className="h-20 w-auto" />
+            <div className="w-40 h-40 flex items-center justify-center mb-4">
+              <Image src="/logo/stanford.svg" alt="Stanford Logo" width={240} height={240} className="h-24 w-auto" />
             </div>
             <p className="text-lg font-medium text-white">Top-Tier Mentorship</p>
             <p className="text-base text-gray-400 mt-1 max-w-xs mx-auto">Guidance from experts and alumni from Stanford Pre-Collegiate</p>
           </div>
           <div className="flex flex-col items-center text-center">
-             <div className="w-32 h-32 flex items-center justify-center mb-4">
-                <span className="text-6xl">🇺🇿</span>
+             <div className="w-40 h-40 flex items-center justify-center mb-4">
+                <span className="text-7xl">🇺🇿</span>
               </div>
             <p className="text-lg font-medium text-white">Official Partnership</p>
             <p className="text-base text-gray-400 mt-1 max-w-xs mx-auto">Strategic collaboration with the Youth Affair Agency in Uzbekistan</p>
