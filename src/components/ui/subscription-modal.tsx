@@ -54,8 +54,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
       setSuccess(true);
       setTimeout(handleClose, 2000); // Auto-close on success
 
-    } catch (err: any) {
-      setError(err.message);
+    } catch (error) {
+      const err = error as { message?: string };
+      setError(err.message || 'An unexpected error occurred.');
     } finally {
       setIsLoading(false);
     }
@@ -71,7 +72,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
     return () => {
       window.removeEventListener('keydown', handleEsc);
     };
-  }, [onClose]);
+  }, [handleClose, onClose]);
 
   return (
     <AnimatePresence>
@@ -94,7 +95,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
             {success ? (
               <div className="text-center">
                 <h3 className="text-2xl font-semibold mb-2">Thank You!</h3>
-                <p className="text-neutral-400">You're on the list. We'll be in touch.</p>
+                <p className="text-neutral-400">You&apos;re on the list. We&apos;ll be in touch.</p>
               </div>
             ) : (
               <div className="text-center">
