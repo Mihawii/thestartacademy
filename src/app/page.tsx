@@ -63,12 +63,17 @@ const heroItemVariants = {
 };
 
 function Hero() {
+  const [isMounted, setIsMounted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
     () => ["innovative", "real", "impactful", "reliable"],
     []
   );
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -122,28 +127,31 @@ function Hero() {
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-spektr-cyan-50">The Start Academy is</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
-                &nbsp;
-                {titles.map((title, index) => (
-                  <motion.span
-                    key={index}
-                    className="absolute font-semibold"
-                    initial={{ opacity: 0, y: -100 }}
-                    transition={{ type: "spring", stiffness: 50 }}
-                    animate={
-                      titleNumber === index
-                        ? {
-                            y: 0,
-                            opacity: 1,
-                          }
-                        : {
-                            y: titleNumber > index ? -150 : 150,
-                            opacity: 0,
-                          }
-                    }
-                  >
-                    {title}
-                  </motion.span>
-                ))}
+                {isMounted ? (
+                  titles.map((title, index) => (
+                    <motion.span
+                      key={index}
+                      className="absolute font-semibold"
+                      initial={{ opacity: 0, y: -100 }}
+                      transition={{ type: "spring", stiffness: 50 }}
+                      animate={
+                        titleNumber === index
+                          ? {
+                              y: 0,
+                              opacity: 1,
+                            }
+                          : {
+                              y: titleNumber > index ? -150 : 150,
+                              opacity: 0,
+                            }
+                      }
+                    >
+                      {title}
+                    </motion.span>
+                  ))
+                ) : (
+                  <span className="font-semibold">&nbsp;</span>
+                )}
               </span>
             </h1>
           </motion.div>
