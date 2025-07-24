@@ -22,7 +22,7 @@ const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" as const },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user }) {
       if (!user.email) return false;
       
       // Check if the user's email is in the allowed students list
