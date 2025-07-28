@@ -121,8 +121,8 @@ export function MiniNavbar() {
       {/* mobile menu */}
       <div
         className={cn(
-          "sm:hidden flex flex-col items-center w-full transition-all duration-300 overflow-hidden",
-          isOpen ? "max-h-[1000px] opacity-100 pt-4" : "max-h-0 opacity-0 pt-0 pointer-events-none"
+          "sm:hidden flex flex-col items-center w-full transform-gpu origin-top transition-transform duration-300 ease-in-out",
+          isOpen ? "scale-y-100 opacity-100 pt-4" : "scale-y-0 opacity-0 pt-0 pointer-events-none"
         )}
       >
         <nav className="flex flex-col items-center space-y-4 w-full">

@@ -47,7 +47,6 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!isDesktop) return;
     const timeoutId = setTimeout(() => {
       setTitleNumber((prev) => (prev === titles.length - 1 ? 0 : prev + 1));
     }, 2000);
@@ -109,7 +108,7 @@ export function Hero() {
                     </motion.span>
                   ))
                 ) : (
-                  <span className="absolute font-semibold w-full text-center">{titles[0]}</span>
+                  <span className="absolute font-semibold w-full text-center">{titles[titleNumber]}</span>
                 )}
               </span>
             </h1>
