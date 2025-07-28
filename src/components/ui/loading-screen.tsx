@@ -76,14 +76,14 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible }) => {
     },
   };
 
-  const progressVariants = {
+  const progressVariants: Variants = {
     hidden: { width: 0 },
     visible: {
-      width: "100%",
+      width: "100%" as string | number,
       transition: {
         duration: 2.5,
         delay: 1.5,
-        ease: "easeInOut",
+        ease: "easeInOut" as any,
       },
     },
   };
