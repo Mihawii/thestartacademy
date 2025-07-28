@@ -36,25 +36,21 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible }) => {
   };
 
   const iconVariants = {
-    hidden: { 
-      scale: 0, 
+    hidden: {
+      scale: 0,
       rotate: -180,
-      opacity: 0 
+      opacity: 0,
     },
-    visible: { 
-      scale: [0, 1.2, 1], 
+    visible: {
+      scale: [0, 1.2, 1] as number[],
       rotate: 0,
       opacity: 1,
       transition: {
         duration: 0.8,
         ease: "easeOut",
-        scale: {
-          times: [0, 0.6, 1],
-          duration: 0.8,
-        },
       },
     },
-  };
+  } as const;
 
   const pulseVariants = {
     pulse: {
