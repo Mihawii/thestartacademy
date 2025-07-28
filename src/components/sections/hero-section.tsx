@@ -29,6 +29,7 @@ const heroItemVariants = {
 
 export function Hero() {
   const [isMounted, setIsMounted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
@@ -38,32 +39,36 @@ export function Hero() {
 
   useEffect(() => {
     setIsMounted(true);
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const updateDesktopStatus = () => setIsDesktop(mediaQuery.matches);
+    updateDesktopStatus();
+    mediaQuery.addEventListener("change", updateDesktopStatus);
+    return () => mediaQuery.removeEventListener("change", updateDesktopStatus);
   }, []);
 
   useEffect(() => {
+    if (!isDesktop) return;
     const timeoutId = setTimeout(() => {
-      if (titleNumber === titles.length - 1) {
-        setTitleNumber(0);
-      } else {
-        setTitleNumber(titleNumber + 1);
-      }
+      setTitleNumber((prev) => (prev === titles.length - 1 ? 0 : prev + 1));
     }, 2000);
     return () => clearTimeout(timeoutId);
-  }, [titleNumber, titles]);
+  }, [titleNumber, titles, isDesktop]);
+
+  const MotionWrapper = isDesktop ? motion.div : 'div';
 
   return (
-    <motion.div
+    <MotionWrapper
       className="w-full min-h-[60vh] flex flex-col items-center justify-center"
-      
-      
-      style={{ willChange: "opacity, transform, filter" }}
+      variants={isDesktop ? heroContainerVariants : {}}
+      initial={isDesktop ? "hidden" : "visible"}
+      animate={isDesktop ? "visible" : "visible"}
     >
       <div className="container mx-auto md:container md:mx-auto lg:container lg:mx-auto xl:container xl:mx-auto">
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
-          <motion.div className="flex flex-col items-center gap-2" style={{ willChange: "opacity, transform, filter" }}>
+          <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center gap-2">
             <Image src="/logo/logo.png" alt="The Start Academy Logo" width={48} height={48} />
-          </motion.div>
-          <motion.div className="flex flex-col items-center gap-4 mt-2" style={{ willChange: "opacity, transform, filter" }}>
+          </MotionWrapper>
+          <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center gap-4 mt-2">
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
                 href="https://www.instagram.com/thestartacademy?igsh=bWRlbTYxb25vMDdn" 
@@ -82,46 +87,39 @@ export function Hero() {
                 contact@thestartacademy.com
               </a>
             </div>
-          </motion.div>
-          <motion.div
-            className="flex gap-4 flex-col"
-            initial={{ opacity: 1, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-           style={{ willChange: "opacity, transform, filter" }}>
+          </MotionWrapper>
+          <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-spektr-cyan-50">The Start Academy is</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center h-12 md:h-20 md:pb-4 md:pt-1">
-                {isMounted && titles.map((title, index) => (
-                  <motion.span
-                    key={index}
-                    className="absolute font-semibold"
-                    initial={{ opacity: 0, y: -100 }}
-                    transition={{ type: "spring", stiffness: 50 }}
-                    animate={
-                      titleNumber === index
-                        ? {
-                            y: 0,
-                            opacity: 1,
-                          }
-                        : {
-                            y: titleNumber > index ? -150 : 150,
-                            opacity: 0,
-                          }
-                    }
-                  >
-                    {title}
-                  </motion.span>
-                ))}
+                {isDesktop ? (
+                  isMounted && titles.map((title, index) => (
+                    <motion.span
+                      key={index}
+                      className="absolute font-semibold"
+                      initial={{ opacity: 0, y: -100 }}
+                      transition={{ type: "spring", stiffness: 50 }}
+                      animate={
+                        titleNumber === index
+                          ? { y: 0, opacity: 1 }
+                          : { y: titleNumber > index ? -150 : 150, opacity: 0 }
+                      }
+                    >
+                      {title}
+                    </motion.span>
+                  ))
+                ) : (
+                  <span className="absolute font-semibold w-full text-center">{titles[0]}</span>
+                )}
               </span>
             </h1>
-          </motion.div>
-          <motion.div className="flex flex-col items-center" style={{ willChange: "opacity, transform, filter" }}>
+          </MotionWrapper>
+          <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center">
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
               Best student career accelerator program in Central Asia.
             </p>
-          </motion.div>
-          <motion.div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto" style={{ willChange: "opacity, transform, filter" }}>
+          </MotionWrapper>
+          <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <a
               href="#about"
               className="inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-medium transition-colors rounded-md whitespace-nowrap bg-background hover:bg-accent hover:text-accent-foreground h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input"
@@ -135,10 +133,10 @@ export function Hero() {
             >
               Sign up here <MoveRight className="w-4 h-4" />
             </Button>
-          </motion.div>
+          </MotionWrapper>
         </div>
       </div>
       <SubscriptionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </motion.div>
+    </MotionWrapper>
   );
 }
