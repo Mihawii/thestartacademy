@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 html {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--background);
+  color: var(--foreground);
   scroll-behavior: smooth;
 }
 
@@ -62,19 +62,12 @@ body {
 }
 
 .silver-gradient-text {
-  background: linear-gradient(90deg, #f5f7fa, #d7d7d7, #f5f7fa);
+  background: linear-gradient(90deg, #ffffff, #bdbdbd 25%, #9a9a9a 50%, #bdbdbd 75%, #ffffff);
   background-size: 200% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: silverGradientMove 4s ease-in-out infinite alternate;
   text-decoration: underline;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-}
-
-html:not(.dark) .silver-gradient-text {
-  /* Darker chrome gradient and dark stroke for legibility on white */
-  background: linear-gradient(90deg, #bfc1c2, #8e8e8e, #bfc1c2);
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-  -webkit-text-stroke: 0.6px #444;
+  text-shadow: 0 0 14px rgba(255,255,255,0.95), 0 0 6px rgba(255,255,255,0.7);
 }

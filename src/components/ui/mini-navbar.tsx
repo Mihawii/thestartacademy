@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 import Image from "next/image";
+import { Sun, Moon } from "lucide-react";
 
 
 const AnimatedNavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
@@ -30,9 +31,13 @@ const AnimatedNavLink = ({ href, children }: { href: string; children: React.Rea
 
 export function MiniNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>(() =>
-    typeof window !== 'undefined' && localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
-  );
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') return stored;
+    // fallback to system preference
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  });
   const [headerShapeClass, setHeaderShapeClass] = useState("rounded-full");
   const shapeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -122,17 +127,9 @@ export function MiniNavbar() {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-white transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 transition-colors backdrop-blur-sm"
           >
-            {theme === 'dark' ? (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path d="M12 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm5.657 3.343a1 1 0 010 1.414l-1.414 1.414a1 1 0 11-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM21 11h-2a1 1 0 110-2h2a1 1 0 110 2zm-3.343 7.657a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 111.414-1.414l1.414 1.414a1 1 0 010 1.414zM13 19v2a1 1 0 11-2 0v-2a1 1 0 112 0zm-7.657-1.343a1 1 0 010-1.414l1.414-1.414a1 1 0 111.414 1.414L6.757 17.657a1 1 0 01-1.414 0zM5 11H3a1 1 0 110-2h2a1 1 0 110 2zm3.343-7.657a1 1 0 011.414 0l1.414 1.414A1 1 0 018.757 6.171L7.343 4.757a1 1 0 010-1.414z" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M12 2a9.953 9.953 0 00-7.071 2.929A10 10 0 1012 2zm0 18a8 8 0 110-16 8 8 0 010 16z" clipRule="evenodd" />
-              </svg>
-            )}
+            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           {signInBtn}
           {registerBtn}
