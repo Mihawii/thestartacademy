@@ -1,4 +1,5 @@
 const config = {
+  darkMode: 'class',
   theme: {
     extend: {
       maxWidth: {

@@ -7,10 +7,15 @@ html {
 }
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  /* Light theme (default when no .dark class) */
   --background: #ffffff;
   --foreground: #171717;
+}
+
+html.dark {
+  /* Dark theme overrides */
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -65,4 +70,11 @@ body {
   animation: silverGradientMove 4s ease-in-out infinite alternate;
   text-decoration: underline;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+html:not(.dark) .silver-gradient-text {
+  /* Darker chrome gradient and dark stroke for legibility on white */
+  background: linear-gradient(90deg, #bfc1c2, #8e8e8e, #bfc1c2);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  -webkit-text-stroke: 0.6px #444;
 }
