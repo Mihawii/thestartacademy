@@ -66,7 +66,7 @@ export function Hero() {
       <div className="container mx-auto md:container md:mx-auto lg:container lg:mx-auto xl:container xl:mx-auto">
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
           <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center gap-2">
-            <Image src="/logo/logo.png" alt="The Start Academy Logo" width={48} height={48} />
+            <Image src="/logo/logo.png" alt="The Start Academy Logo" width={48} height={48} priority />
           </MotionWrapper>
           <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center gap-4 mt-2">
             <div className="flex flex-col sm:flex-row gap-4">
