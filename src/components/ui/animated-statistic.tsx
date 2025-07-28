@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { animate } from 'framer-motion';
+import { animate } from '@/components/ui/framer';
 
 interface AnimatedStatisticProps {
   value: number;

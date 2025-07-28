@@ -1,5 +1,7 @@
 import NextAuth, { type NextAuthOptions, type DefaultSession } from "next-auth";
 import Google from "next-auth/providers/google";
+import Email from "next-auth/providers/email";
+import { Resend } from 'resend';
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 
@@ -17,6 +19,39 @@ const authOptions: NextAuthOptions = {
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    Email({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: process.env.EMAIL_FROM,
+      sendVerificationRequest: async ({ identifier: email, url }) => {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`Login link for ${email}: ${url}`);
+          return;
+        }
+
+        try {
+          console.log(`Sending verification email to ${email}`);
+          await resend.emails.send({
+            from: 'The Start Academy <auth@thestart.academy>',
+            to: email,
+            subject: 'Sign in to The Start Academy',
+            html: `<p>Click the magic link to sign in to your account.</p><p><a href="${url}"><b>Sign in</b></a></p>`,
+          });
+          console.log('Verification email sent successfully.');
+        } catch (error) {
+          console.error('Failed to send verification email:', error);
+          throw new Error('Failed to send verification email.');
+        }
+      },
     }),
   ],
   session: { strategy: "jwt" as const },

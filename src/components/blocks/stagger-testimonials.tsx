@@ -71,6 +71,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ position, testimonial
 export const StaggerTestimonials: React.FC = () => {
   const [cardSize, setCardSize] = useState(365);
   const [testimonialsList, setTestimonialsList] = useState(testimonials);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleMove = (steps: number) => {
     const newList = [...testimonialsList];
@@ -91,6 +96,8 @@ export const StaggerTestimonials: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!isMounted) return;
+
     const updateSize = () => {
       const { matches } = window.matchMedia("(min-width: 640px)");
       setCardSize(matches ? 365 : 290);
@@ -99,11 +106,11 @@ export const StaggerTestimonials: React.FC = () => {
     updateSize();
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
-  }, []);
+  }, [isMounted]);
 
   return (
     <div className="relative w-full overflow-hidden bg-muted/30" style={{ height: 600 }}>
-      {testimonialsList.map((testimonial, index) => {
+      {isMounted && testimonialsList.map((testimonial, index) => {
         const position = testimonialsList.length % 2 ? index - (testimonialsList.length + 1) / 2 : index - testimonialsList.length / 2;
         return (
           <TestimonialCard key={testimonial.tempId} testimonial={testimonial} handleMove={handleMove} position={position} cardSize={cardSize} />

@@ -1,6 +1,7 @@
+'use client';
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/ui/framer";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
