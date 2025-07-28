@@ -72,9 +72,15 @@ export const StaggerTestimonials: React.FC = () => {
   const [cardSize, setCardSize] = useState(365);
   const [testimonialsList, setTestimonialsList] = useState(testimonials);
   const [isMounted, setIsMounted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+    const mediaQuery = window.matchMedia("(min-width: 640px)");
+    const updateDesktopStatus = () => setIsDesktop(mediaQuery.matches);
+    updateDesktopStatus();
+    mediaQuery.addEventListener("change", updateDesktopStatus);
+    return () => mediaQuery.removeEventListener("change", updateDesktopStatus);
   }, []);
 
   const handleMove = (steps: number) => {
@@ -95,25 +101,44 @@ export const StaggerTestimonials: React.FC = () => {
     setTestimonialsList(newList);
   };
 
-  useEffect(() => {
-    if (!isMounted) return;
+  if (!isMounted) {
+    return <div className="w-full bg-muted/30" style={{ height: 600 }} />; // Placeholder to prevent layout shift
+  }
 
-    const updateSize = () => {
-      const { matches } = window.matchMedia("(min-width: 640px)");
-      setCardSize(matches ? 365 : 290);
-    };
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, [isMounted]);
+  if (!isDesktop) {
+    return (
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-semibold text-center mb-10">What Our Fellows Say</h2>
+          <div className="grid gap-6">
+            {testimonials.slice(0, 3).map((testimonial) => (
+              <div key={testimonial.tempId} className="border p-6 rounded-lg bg-card text-card-foreground shadow-sm">
+                <Quote className="h-6 w-6 text-muted-foreground/50 mb-4" />
+                <p className="font-medium text-lg">“{testimonial.testimonial}”</p>
+                <p className="text-sm italic text-muted-foreground mt-4">- {testimonial.by}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <div className="relative w-full overflow-hidden bg-muted/30" style={{ height: 600 }}>
-      {isMounted && testimonialsList.map((testimonial, index) => {
-        const position = testimonialsList.length % 2 ? index - (testimonialsList.length + 1) / 2 : index - testimonialsList.length / 2;
+      {testimonialsList.map((testimonial, index) => {
+        const position =
+          testimonialsList.length % 2
+            ? index - (testimonialsList.length + 1) / 2
+            : index - testimonialsList.length / 2;
         return (
-          <TestimonialCard key={testimonial.tempId} testimonial={testimonial} handleMove={handleMove} position={position} cardSize={cardSize} />
+          <TestimonialCard
+            key={testimonial.tempId}
+            testimonial={testimonial}
+            handleMove={handleMove}
+            position={position}
+            cardSize={cardSize}
+          />
         );
       })}
       <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
