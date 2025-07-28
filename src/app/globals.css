@@ -45,3 +45,24 @@ body {
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
+
+/* Silver gradient moving text */
+@keyframes silverGradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.silver-gradient-text {
+  background: linear-gradient(90deg, #f5f7fa, #d7d7d7, #f5f7fa);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: silverGradientMove 4s ease-in-out infinite alternate;
+  text-decoration: underline;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}

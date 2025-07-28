@@ -18,21 +18,22 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
     const { email } = parsed.data;
+    const normalizedEmail = email.toLowerCase();
 
     // generate six-digit code
     const code = Math.floor(100000 + Math.random() * 900000).toString();
     const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
 
     // remove any previous codes for this email then insert new
-    await prisma.verificationCode.deleteMany({ where: { email } });
-    await prisma.verificationCode.create({ data: { email, code, expiresAt } });
+    await prisma.verificationCode.deleteMany({ where: { email: normalizedEmail } });
+    await prisma.verificationCode.create({ data: { email: normalizedEmail, code, expiresAt } });
 
     // send email via Resend
     if (resend && process.env.FROM_EMAIL) {
       try {
         const result = await resend.emails.send({
           from: process.env.FROM_EMAIL,
-          to: [email],
+          to: [normalizedEmail],
           subject: "Your verification code",
           html: `<p>Your verification code is <strong style="font-size:24px">${code}</strong></p>`,
         });

@@ -51,7 +51,7 @@ export function MiniNavbar() {
 
   const logo = (
     <Link href="/" aria-label="Home" className="shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
-      <Image src="/logo/logo.png" alt="Logo" width={40} height={40} priority placeholder="empty" className="rounded-full hover:scale-105 transition-transform duration-200" />
+      <Image src="/logo/logo.svg" alt="Logo" width={40} height={40} priority placeholder="empty" className="rounded-full hover:scale-105 transition-transform duration-200" />
     </Link>
   );
 

@@ -111,8 +111,13 @@ export const SignInPage: React.FC<{ className?: string }> = ({ className }) => {
         
         // Redirect after a short delay to show success message
         setTimeout(() => {
-          window.location.href = 'https://tsa-platform-r129.vercel.app';
-        }, 1000);
+          try {
+            window.location.replace('https://tsa-platform-r129.vercel.app');
+          } catch (error) {
+            // Fallback if replace fails
+            window.location.href = 'https://tsa-platform-r129.vercel.app';
+          }
+        }, 1500);
         
       } catch (error) {
       const err = error as { message?: string };

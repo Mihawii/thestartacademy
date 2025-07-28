@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
               </span>
             </h1>
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
-              Best student career accelerator program in Central Asia.
+              Project management program
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">

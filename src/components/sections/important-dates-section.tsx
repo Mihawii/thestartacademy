@@ -8,10 +8,10 @@ interface Milestone {
 }
 
 const milestones: Milestone[] = [
-  { label: "Applications Open", date: "Aug 1" },
-  { label: "Application Deadline", date: "Sep 15" },
-  { label: "Cohort Kick-off", date: "Oct 5" },
-  { label: "Demo Day", date: "Dec 20" },
+  { label: "Applications Open", date: "Sep 1" },
+  { label: "Application Deadline", date: "Sep 25" },
+  { label: "Cohort Kick-off", date: "Oct 10" },
+  { label: "Demo Day", date: "Nov 7" },
 ];
 
 interface ImportantDatesSectionProps {
