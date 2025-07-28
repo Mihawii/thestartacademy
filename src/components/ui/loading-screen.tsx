@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { BookOpen, GraduationCap, Users, Target, Lightbulb, Trophy } from 'lucide-react';
 
 interface LoadingScreenProps {
@@ -52,10 +52,10 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible }) => {
     },
   } as const;
 
-  const pulseVariants = {
+  const pulseVariants: Variants = {
     pulse: {
-      scale: [1, 1.1, 1],
-      opacity: [0.7, 1, 0.7],
+      scale: [1, 1.1, 1] as number[],
+      opacity: [0.7, 1, 0.7] as number[],
       transition: {
         duration: 2,
         repeat: Infinity,
