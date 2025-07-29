@@ -48,12 +48,11 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!isDesktop) return;
     const timeoutId = setTimeout(() => {
       setTitleNumber((prev) => (prev === titles.length - 1 ? 0 : prev + 1));
     }, 2000);
     return () => clearTimeout(timeoutId);
-  }, [titleNumber, titles, isDesktop]);
+  }, [titleNumber, titles]);
 
   const MotionWrapper = isDesktop ? motion.div : 'div';
 
@@ -67,7 +66,7 @@ export function Hero() {
       <div className="container mx-auto px-4">
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
           <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center gap-2">
-            <SiteLogo size={48} />
+            <SiteLogo size={48} className="mt-8 md:mt-0" />
           </MotionWrapper>
           <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center gap-4 mt-2">
             <div className="flex flex-col sm:flex-row gap-4">
@@ -93,8 +92,7 @@ export function Hero() {
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-spektr-cyan-50">The Start Academy is</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center h-12 md:h-20 md:pb-4 md:pt-1">
-                {isDesktop ? (
-                  isMounted && titles.map((title, index) => (
+                {isMounted && titles.map((title, index) => (
                     <motion.span
                       key={index}
                       className="absolute font-semibold"
@@ -108,10 +106,7 @@ export function Hero() {
                     >
                       {title}
                     </motion.span>
-                  ))
-                ) : (
-                  <span className="absolute font-semibold w-full text-center">{titles[0]}</span>
-                )}
+                  ))}
               </span>
             </h1>
           </MotionWrapper>
