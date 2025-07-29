@@ -230,7 +230,7 @@ const EmailStep: React.FC<{
       className="w-full backdrop-blur text-white border border-white/10 rounded-full py-3 px-4 focus:outline-none focus:border-white/30 text-center bg-white/5"
     />
     <button
-      className="w-full rounded-full bg-white text-black py-3 font-medium hover:bg-white/90 transition-colors"
+      className="w-full rounded-full bg-brandGray text-white py-3 font-medium hover:bg-gray-700 transition-colors"
       type="submit"
     >
       Continue →
@@ -293,7 +293,7 @@ const SuccessStep: React.FC = () => (
     <p className="text-lg text-white/60">Welcome to the dashboard</p>
     <Link
       href="/"
-      className="rounded-full bg-white text-black py-3 px-8 font-medium hover:bg-white/90 transition-colors inline-block"
+      className="rounded-full bg-brandGray text-white py-3 px-8 font-medium hover:bg-gray-700 transition-colors inline-block"
     >
       Home
     </Link>

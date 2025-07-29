@@ -126,7 +126,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
                   <Button
                     onClick={handleSubscribe}
                     disabled={isLoading}
-                    className="bg-white text-black hover:bg-neutral-200 disabled:bg-neutral-400 disabled:text-neutral-700"
+                    className="bg-brandGray text-white hover:bg-gray-700 disabled:bg-gray-500 disabled:text-gray-300"
                   >
                     {isLoading ? 'Subscribing...' : 'Subscribe'}
                   </Button>

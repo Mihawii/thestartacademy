@@ -13,6 +13,8 @@ const geistMono = Geist_Mono({
 
 import type { Metadata, Viewport } from "next";
 import { MiniNavbar } from "../components/ui/mini-navbar";
+import { Providers } from "./providers";
+import { ThemedClickSpark } from '@/components/ui/themed-click-spark';
 
 
 export const viewport: Viewport = {
@@ -31,12 +33,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-          <MiniNavbar />
-          {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>
+          <ThemedClickSpark>
+            <MiniNavbar />
+            {children}
+          </ThemedClickSpark>
+        </Providers>
       </body>
     </html>
   );

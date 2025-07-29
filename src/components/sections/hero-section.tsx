@@ -5,6 +5,7 @@ import { motion, easeOut } from "@/components/ui/framer";
 import { Mail, Instagram, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import SiteLogo from "../ui/site-logo";
 import { SubscriptionModal } from '@/components/ui/subscription-modal';
 
 const heroContainerVariants = {
@@ -47,6 +48,7 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
+    if (!isDesktop) return;
     const timeoutId = setTimeout(() => {
       setTitleNumber((prev) => (prev === titles.length - 1 ? 0 : prev + 1));
     }, 2000);
@@ -62,10 +64,10 @@ export function Hero() {
       initial={isDesktop ? "hidden" : "visible"}
       animate={isDesktop ? "visible" : "visible"}
     >
-      <div className="container mx-auto md:container md:mx-auto lg:container lg:mx-auto xl:container xl:mx-auto">
+      <div className="container mx-auto px-4">
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
           <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center gap-2">
-            <Image src="/logo/logo.svg" alt="The Start Academy Logo" width={48} height={48} priority />
+            <SiteLogo size={48} />
           </MotionWrapper>
           <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center gap-4 mt-2">
             <div className="flex flex-col sm:flex-row gap-4">
@@ -73,14 +75,14 @@ export function Hero() {
                 href="https://www.instagram.com/thestartacademy?igsh=bWRlbTYxb25vMDdn" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-white/10 hover:bg-white/20 transition-colors text-white"
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-colors bg-brandGray text-white hover:bg-gray-700 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
               >
                 <Instagram className="w-4 h-4" />
                 @thestartacademy
               </a>
               <a 
                 href="mailto:contact@thestartacademy.com" 
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-white/10 hover:bg-white/20 transition-colors text-white"
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-colors bg-brandGray text-white hover:bg-gray-700 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
               >
                 <Mail className="w-4 h-4" />
                 contact@thestartacademy.com
@@ -91,27 +93,31 @@ export function Hero() {
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-spektr-cyan-50">The Start Academy is</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center h-12 md:h-20 md:pb-4 md:pt-1">
-                {isMounted && titles.map((title, index) => (
-                  <motion.span
-                    key={index}
-                    className="absolute font-semibold w-full text-center"
-                    initial={{ opacity: 0, y: -100 }}
-                    transition={{ type: "spring", stiffness: 50 }}
-                    animate={
-                      titleNumber === index
-                        ? { y: 0, opacity: 1 }
-                        : { y: titleNumber > index ? -150 : 150, opacity: 0 }
-                    }
-                  >
-                    {title}
-                  </motion.span>
-                ))}
+                {isDesktop ? (
+                  isMounted && titles.map((title, index) => (
+                    <motion.span
+                      key={index}
+                      className="absolute font-semibold"
+                      initial={{ opacity: 0, y: -100 }}
+                      transition={{ type: "spring", stiffness: 50 }}
+                      animate={
+                        titleNumber === index
+                          ? { y: 0, opacity: 1 }
+                          : { y: titleNumber > index ? -150 : 150, opacity: 0 }
+                      }
+                    >
+                      {title}
+                    </motion.span>
+                  ))
+                ) : (
+                  <span className="absolute font-semibold w-full text-center">{titles[0]}</span>
+                )}
               </span>
             </h1>
           </MotionWrapper>
           <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col items-center">
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
-              Our student is making <span className="silver-gradient-text">millions</span>! (in KZT)
+              Our student is making <span className="gradient-text underline">millions</span>! (in KZT)
             </p>
           </MotionWrapper>
           <MotionWrapper variants={isDesktop ? heroItemVariants : {}} className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">

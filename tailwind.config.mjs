@@ -1,7 +1,10 @@
 const config = {
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        brandGray: '#323232',
+      },
       maxWidth: {
         container: "1280px",
       },

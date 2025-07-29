@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 
 interface HandWrittenTitleProps {
   title?: string;
@@ -11,6 +12,7 @@ export function HandWrittenTitle({
   title = "Hand Written",
   subtitle = "Optional subtitle",
 }: HandWrittenTitleProps) {
+  const { theme } = useTheme();
   const draw = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: {
@@ -37,24 +39,21 @@ export function HandWrittenTitle({
         >
           <title>KokonutUI</title>
           <motion.path
-            d="M 950 90 
-               C 1250 300, 1050 480, 600 520
-               C 250 520, 150 480, 150 300
-               C 150 120, 350 80, 600 80
-               C 850 80, 950 180, 950 180"
+            d="M 950 90 C 1250 300, 1050 480, 600 520 C 250 520, 150 480, 150 300 C 150 120, 350 80, 600 80 C 850 80, 950 180, 950 180"
             fill="none"
             strokeWidth="12"
-            stroke="currentColor"
+            stroke={theme === 'light' ? '#000000' : '#FFFFFF'}
             strokeLinecap="round"
             strokeLinejoin="round"
             variants={draw}
-            className="text-black dark:text-white opacity-90"
+            className="opacity-90"
           />
         </motion.svg>
       </div>
       <div className="relative text-center z-10 flex flex-col items-center justify-center">
         <motion.h1
-          className="text-4xl md:text-6xl text-black dark:text-white tracking-tighter flex items-center gap-2"
+          className="text-4xl md:text-6xl tracking-tighter flex items-center gap-2"
+          style={{ color: theme === 'light' ? '#000000' : '#FFFFFF' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -64,7 +63,8 @@ export function HandWrittenTitle({
         </motion.h1>
         {subtitle && (
           <motion.p
-            className="text-xl text-black/80 dark:text-white/80"
+            className="text-xl"
+            style={{ color: theme === 'light' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)' }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}
