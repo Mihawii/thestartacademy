@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { BookOpen, GraduationCap, Users, Target, Lightbulb, Trophy } from 'lucide-react';
 
 interface LoadingScreenProps {
@@ -35,7 +35,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible }) => {
     },
   };
 
-  const iconVariants = {
+  const iconVariants: Variants = {
     hidden: { 
       scale: 0, 
       rotate: -180,
@@ -48,15 +48,12 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible }) => {
       transition: {
         duration: 0.8,
         ease: "easeOut",
-        scale: {
-          times: [0, 0.6, 1],
-          duration: 0.8,
-        },
-      },
+        times: [0, 0.6, 1],
+      } as any,
     },
   };
 
-  const pulseVariants = {
+  const pulseVariants: Variants = {
     pulse: {
       scale: [1, 1.1, 1],
       opacity: [0.7, 1, 0.7],
@@ -64,7 +61,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible }) => {
         duration: 2,
         repeat: Infinity,
         ease: "easeInOut",
-      },
+      } as any,
     },
   };
 
@@ -80,7 +77,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible }) => {
     },
   };
 
-  const progressVariants = {
+  const progressVariants: Variants = {
     hidden: { width: 0 },
     visible: {
       width: "100%",
@@ -88,7 +85,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isVisible }) => {
         duration: 2.5,
         delay: 1.5,
         ease: "easeInOut",
-      },
+      } as any,
     },
   };
 
