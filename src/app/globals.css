@@ -1,41 +1,138 @@
 @import "tailwindcss";
 
-html {
-  background-color: var(--background);
-  color: var(--foreground);
-  scroll-behavior: smooth;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  /* Light theme (default when no .dark class) */
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-html.dark {
-  /* Dark theme overrides */
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans), sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Themed Logo */
+.dark .logo-themed path {
+  fill: hsl(var(--foreground));
+}
+.light .logo-themed path {
+  fill: #000;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-text {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  animation: gradient-animation 4s ease-in-out infinite, glow-pulse 2.5s ease-in-out infinite;
+  background-size: 200% 200%;
+  display: inline-block;
+}
+
+.dark .gradient-text {
+  background-image: linear-gradient(135deg, #ffffff, #e6e6e6, #bfbfbf, #ffffff);
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+}
+
+.light .gradient-text {
+  background-image: linear-gradient(135deg, #000000, #cccccc, #666666, #000000);
+  text-shadow: 0 0 14px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes glow-pulse {
+  0% {
+    text-shadow: inherit;
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255,255,255,0.85), 0 0 30px rgba(255,255,255,0.6);
+  }
+  100% {
+    text-shadow: inherit;
+  }
+}
+
+/* ClickSpark Animation */
+@keyframes spark-animation {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.spark {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+  transform-origin: center;
+  animation: spark-animation 0.6s ease-out forwards;
+  z-index: 9999;
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff00c1, 0 0 40px #ff00c1;
 }
 
 @keyframes marquee {
@@ -62,12 +159,12 @@ body {
 }
 
 .silver-gradient-text {
-  background: linear-gradient(90deg, #ffffff, #bdbdbd 25%, #9a9a9a 50%, #bdbdbd 75%, #ffffff);
+  background: linear-gradient(90deg, #c0c0c0, #ffffff, #c0c0c0);
   background-size: 200% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: silverGradientMove 4s ease-in-out infinite alternate;
+  animation: silverGradientMove 2s linear infinite;
   text-decoration: underline;
-  text-shadow: 0 0 14px rgba(255,255,255,0.95), 0 0 6px rgba(255,255,255,0.7);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
 }
