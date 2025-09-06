@@ -25,12 +25,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ className }) => (
       
       <div className="mt-8">
         <Link href="/about">
-          <Button 
-            size="lg" 
-            className="px-8 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 active:scale-95 button-pulse"
+          <button
+            type="button"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-200 rounded-md whitespace-nowrap bg-transparent cursor-pointer select-none text-foreground border-2 border-foreground hover:bg-foreground hover:text-background hover:scale-105 active:scale-95"
           >
             Learn More About Our Academy
-          </Button>
+          </button>
         </Link>
       </div>
 

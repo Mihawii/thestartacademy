@@ -16,6 +16,7 @@ import { MiniNavbar } from "../components/ui/mini-navbar";
 import { Providers } from "./providers";
 import { ThemedClickSpark } from '@/components/ui/themed-click-spark';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -142,6 +143,7 @@ export default function RootLayout({
           </ThemedClickSpark>
         </Providers>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

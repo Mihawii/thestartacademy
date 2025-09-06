@@ -50,17 +50,17 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="transition-colors text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                  Twitter
-                </a>
-              </li>
-              <li>
-                <a href="#" className="transition-colors text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                <a href="https://www.linkedin.com/company/the-start-academy" target="_blank" rel="noopener noreferrer" className="transition-colors text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   LinkedIn
                 </a>
               </li>
               <li>
-                <a href="#" className="transition-colors text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                <a href="https://instagram.com/thestartacademy" target="_blank" rel="noopener noreferrer" className="transition-colors text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a href="mailto:contact@thestartacademy.com" className="transition-colors text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                   Contact
                 </a>
               </li>
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
         
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t text-center text-sm border-gray-200 text-gray-600 dark:border-gray-800 dark:text-gray-400">
-          <p>&copy; 2024 The Start Academy. All rights reserved.</p>
+          <p>&copy; 2026 The Start Academy. All rights reserved.</p>
         </div>
       </div>
     </footer>
