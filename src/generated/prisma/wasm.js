@@ -151,8 +151,13 @@ exports.Prisma.ApplicationScalarFieldEnum = {
   uniqueContribution: 'uniqueContribution',
   programGoals: 'programGoals',
   financialAid: 'financialAid',
+  annualIncome: 'annualIncome',
+  financialAidReason: 'financialAidReason',
   commitmentSerious: 'commitmentSerious',
   commitmentDedicated: 'commitmentDedicated',
+  status: 'status',
+  financialAidAmount: 'financialAidAmount',
+  acceptedAt: 'acceptedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

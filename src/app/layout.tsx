@@ -24,49 +24,55 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "The Start Academy | #1 High School Business Accelerator | Entrepreneurship Program",
-  description: "The Start Academy is Central Asia's premier accelerator program for high schoolers interested in entrepreneurship and project management. We empower ambitious students with real-world business skills, startup experience, and mentorship from industry experts. Join our exclusive program today.",
+  title: "The Start Academy",
+  description: "The Start Academy - opportunities for international high schoolers in Central Asia's premier business accelerator program. Entrepreneurship training, project management, startup experience, and mentorship from industry experts. Transform your business ideas into reality with our exclusive program for ambitious students worldwide.",
   keywords: [
     "the start academy",
     "start academy",
-    "the start",
-    "start",
-    "high school business accelerator",
-    "entrepreneurship program for high schoolers",
-    "project management for teenagers",
-    "business training for high school students",
-    "startup accelerator for youth",
-    "teen entrepreneur program",
-    "high school startup program",
-    "business education for teenagers",
-    "entrepreneurship training for students",
+    "старт академия",
+    "стартакадемия",
     "opportunities for international high schoolers",
+    "возможности для международных школьников",
+    "high school business accelerator",
+    "бизнес акселератор для школьников",
+    "entrepreneurship program for high schoolers",
+    "программа предпринимательства для школьников",
+    "project management for teenagers",
+    "проектный менеджмент для подростков",
+    "business training for high school students",
+    "бизнес обучение для школьников",
+    "startup accelerator for youth",
+    "стартап акселератор для молодежи",
+    "teen entrepreneur program",
+    "программа для юных предпринимателей",
+    "business education for teenagers",
+    "бизнес образование для подростков",
+    "entrepreneurship training for students",
+    "обучение предпринимательству для студентов",
     "business accelerator program",
+    "программа бизнес акселератора",
     "startup mentorship for teens",
-    "high school business education",
-    "teen startup accelerator",
+    "менторство стартапов для подростков",
     "business skills for high schoolers",
+    "бизнес навыки для школьников",
     "entrepreneurship education program",
-    "project management training",
-    "business development for students",
-    "startup education for teenagers",
-    "youth business accelerator",
-    "high school entrepreneur training",
-    "business mentorship program",
-    "startup incubator for teens",
-    "entrepreneurial education",
-    "business leadership for students",
-    "innovation program for high schoolers",
-    "startup bootcamp for teens",
+    "программа предпринимательского образования",
     "business accelerator central asia",
+    "бизнес акселератор центральная азия",
     "entrepreneurship central asia",
-    "high school business program",
-    "teen business training",
-    "startup program for students",
-    "business education program",
-    "entrepreneurship accelerator",
-    "project management education",
-    "business skills development"
+    "предпринимательство центральная азия",
+    "kazakhstan business program",
+    "бизнес программа казахстан",
+    "astana startup program",
+    "стартап программа астана",
+    "international student opportunities",
+    "возможности для международных студентов",
+    "summer business program",
+    "летняя бизнес программа",
+    "youth leadership development",
+    "развитие лидерства молодежи",
+    "teen startup incubator",
+    "инкубатор стартапов для подростков"
   ],
   authors: [{ name: "The Start Academy" }],
   creator: "The Start Academy",
@@ -87,7 +93,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://thestartacademy.com',
     siteName: 'The Start Academy',
-    title: 'The Start Academy | #1 High School Business Accelerator Program',
+    title: 'The Start Academy',
     description: 'Central Asia\'s premier accelerator program for high schoolers interested in entrepreneurship and project management. Real-world business skills, startup experience, and expert mentorship.',
     images: [
       {
@@ -107,6 +113,7 @@ export const metadata: Metadata = {
   verification: {
     google: 'your-google-verification-code',
   },
+  category: 'education',
   other: {
     'application-name': 'The Start Academy',
     'mobile-web-app-capable': 'yes',
@@ -132,6 +139,58 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.ico?v=3" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
+        <link rel="alternate" hrefLang="en" href="https://thestartacademy.com" />
+        <link rel="alternate" hrefLang="ru" href="https://thestartacademy.com/ru" />
+        <link rel="alternate" hrefLang="x-default" href="https://thestartacademy.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EducationalOrganization",
+              "name": "The Start Academy",
+              "alternateName": ["Start Academy", "Старт Академия"],
+              "description": "Central Asia's premier business accelerator program for high school students interested in entrepreneurship and project management",
+              "url": "https://thestartacademy.com",
+              "logo": "https://thestartacademy.com/logo/logo.svg",
+              "image": "https://thestartacademy.com/logo/logo.svg",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "KZ",
+                "addressLocality": "Astana",
+                "addressRegion": "Akmola Region"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+77051028049",
+                "email": "olzhas@thestartacademy.com",
+                "contactType": "Admissions"
+              },
+              "hasOfferingCatalog": {
+                "@type": "OfferingCatalog",
+                "name": "Business Accelerator Programs",
+                "itemListElement": [{
+                  "@type": "Course",
+                  "name": "High School Business Accelerator Program",
+                  "description": "Comprehensive entrepreneurship and project management training for international high school students",
+                  "provider": {
+                    "@type": "EducationalOrganization",
+                    "name": "The Start Academy"
+                  },
+                  "courseMode": "blended",
+                  "educationalLevel": "High School",
+                  "teaches": ["Entrepreneurship", "Project Management", "Business Development", "Leadership"],
+                  "audience": {
+                    "@type": "EducationalAudience",
+                    "educationalRole": "student",
+                    "audienceType": "High School Students"
+                  }
+                }]
+              },
+              "keywords": "opportunities for international high schoolers, start academy, business accelerator, entrepreneurship program, high school students, Central Asia, Kazakhstan, Astana"
+            })
+          }}
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}>
         <Providers>

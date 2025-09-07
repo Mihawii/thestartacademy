@@ -3156,8 +3156,13 @@ export namespace Prisma {
     uniqueContribution: string | null
     programGoals: string | null
     financialAid: string | null
+    annualIncome: string | null
+    financialAidReason: string | null
     commitmentSerious: boolean | null
     commitmentDedicated: boolean | null
+    status: string | null
+    financialAidAmount: string | null
+    acceptedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3181,8 +3186,13 @@ export namespace Prisma {
     uniqueContribution: string | null
     programGoals: string | null
     financialAid: string | null
+    annualIncome: string | null
+    financialAidReason: string | null
     commitmentSerious: boolean | null
     commitmentDedicated: boolean | null
+    status: string | null
+    financialAidAmount: string | null
+    acceptedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3206,8 +3216,13 @@ export namespace Prisma {
     uniqueContribution: number
     programGoals: number
     financialAid: number
+    annualIncome: number
+    financialAidReason: number
     commitmentSerious: number
     commitmentDedicated: number
+    status: number
+    financialAidAmount: number
+    acceptedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3243,8 +3258,13 @@ export namespace Prisma {
     uniqueContribution?: true
     programGoals?: true
     financialAid?: true
+    annualIncome?: true
+    financialAidReason?: true
     commitmentSerious?: true
     commitmentDedicated?: true
+    status?: true
+    financialAidAmount?: true
+    acceptedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3268,8 +3288,13 @@ export namespace Prisma {
     uniqueContribution?: true
     programGoals?: true
     financialAid?: true
+    annualIncome?: true
+    financialAidReason?: true
     commitmentSerious?: true
     commitmentDedicated?: true
+    status?: true
+    financialAidAmount?: true
+    acceptedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3293,8 +3318,13 @@ export namespace Prisma {
     uniqueContribution?: true
     programGoals?: true
     financialAid?: true
+    annualIncome?: true
+    financialAidReason?: true
     commitmentSerious?: true
     commitmentDedicated?: true
+    status?: true
+    financialAidAmount?: true
+    acceptedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3405,8 +3435,13 @@ export namespace Prisma {
     uniqueContribution: string | null
     programGoals: string
     financialAid: string
+    annualIncome: string | null
+    financialAidReason: string | null
     commitmentSerious: boolean
     commitmentDedicated: boolean
+    status: string | null
+    financialAidAmount: string | null
+    acceptedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: ApplicationCountAggregateOutputType | null
@@ -3449,8 +3484,13 @@ export namespace Prisma {
     uniqueContribution?: boolean
     programGoals?: boolean
     financialAid?: boolean
+    annualIncome?: boolean
+    financialAidReason?: boolean
     commitmentSerious?: boolean
     commitmentDedicated?: boolean
+    status?: boolean
+    financialAidAmount?: boolean
+    acceptedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["application"]>
@@ -3474,8 +3514,13 @@ export namespace Prisma {
     uniqueContribution?: boolean
     programGoals?: boolean
     financialAid?: boolean
+    annualIncome?: boolean
+    financialAidReason?: boolean
     commitmentSerious?: boolean
     commitmentDedicated?: boolean
+    status?: boolean
+    financialAidAmount?: boolean
+    acceptedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["application"]>
@@ -3499,8 +3544,13 @@ export namespace Prisma {
     uniqueContribution?: boolean
     programGoals?: boolean
     financialAid?: boolean
+    annualIncome?: boolean
+    financialAidReason?: boolean
     commitmentSerious?: boolean
     commitmentDedicated?: boolean
+    status?: boolean
+    financialAidAmount?: boolean
+    acceptedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["application"]>
@@ -3524,13 +3574,18 @@ export namespace Prisma {
     uniqueContribution?: boolean
     programGoals?: boolean
     financialAid?: boolean
+    annualIncome?: boolean
+    financialAidReason?: boolean
     commitmentSerious?: boolean
     commitmentDedicated?: boolean
+    status?: boolean
+    financialAidAmount?: boolean
+    acceptedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "age" | "location" | "currentEducation" | "institution" | "major" | "graduationYear" | "workExperience" | "entrepreneurialExperience" | "technicalSkills" | "whyProgram" | "careerGoals" | "biggestChallenge" | "uniqueContribution" | "programGoals" | "financialAid" | "commitmentSerious" | "commitmentDedicated" | "createdAt" | "updatedAt", ExtArgs["result"]["application"]>
+  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "age" | "location" | "currentEducation" | "institution" | "major" | "graduationYear" | "workExperience" | "entrepreneurialExperience" | "technicalSkills" | "whyProgram" | "careerGoals" | "biggestChallenge" | "uniqueContribution" | "programGoals" | "financialAid" | "annualIncome" | "financialAidReason" | "commitmentSerious" | "commitmentDedicated" | "status" | "financialAidAmount" | "acceptedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["application"]>
 
   export type $ApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Application"
@@ -3554,8 +3609,13 @@ export namespace Prisma {
       uniqueContribution: string | null
       programGoals: string
       financialAid: string
+      annualIncome: string | null
+      financialAidReason: string | null
       commitmentSerious: boolean
       commitmentDedicated: boolean
+      status: string | null
+      financialAidAmount: string | null
+      acceptedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["application"]>
@@ -3999,8 +4059,13 @@ export namespace Prisma {
     readonly uniqueContribution: FieldRef<"Application", 'String'>
     readonly programGoals: FieldRef<"Application", 'String'>
     readonly financialAid: FieldRef<"Application", 'String'>
+    readonly annualIncome: FieldRef<"Application", 'String'>
+    readonly financialAidReason: FieldRef<"Application", 'String'>
     readonly commitmentSerious: FieldRef<"Application", 'Boolean'>
     readonly commitmentDedicated: FieldRef<"Application", 'Boolean'>
+    readonly status: FieldRef<"Application", 'String'>
+    readonly financialAidAmount: FieldRef<"Application", 'String'>
+    readonly acceptedAt: FieldRef<"Application", 'DateTime'>
     readonly createdAt: FieldRef<"Application", 'DateTime'>
     readonly updatedAt: FieldRef<"Application", 'DateTime'>
   }
@@ -5411,8 +5476,13 @@ export namespace Prisma {
     uniqueContribution: 'uniqueContribution',
     programGoals: 'programGoals',
     financialAid: 'financialAid',
+    annualIncome: 'annualIncome',
+    financialAidReason: 'financialAidReason',
     commitmentSerious: 'commitmentSerious',
     commitmentDedicated: 'commitmentDedicated',
+    status: 'status',
+    financialAidAmount: 'financialAidAmount',
+    acceptedAt: 'acceptedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -5611,8 +5681,13 @@ export namespace Prisma {
     uniqueContribution?: StringNullableFilter<"Application"> | string | null
     programGoals?: StringFilter<"Application"> | string
     financialAid?: StringFilter<"Application"> | string
+    annualIncome?: StringNullableFilter<"Application"> | string | null
+    financialAidReason?: StringNullableFilter<"Application"> | string | null
     commitmentSerious?: BoolFilter<"Application"> | boolean
     commitmentDedicated?: BoolFilter<"Application"> | boolean
+    status?: StringNullableFilter<"Application"> | string | null
+    financialAidAmount?: StringNullableFilter<"Application"> | string | null
+    acceptedAt?: DateTimeNullableFilter<"Application"> | Date | string | null
     createdAt?: DateTimeFilter<"Application"> | Date | string
     updatedAt?: DateTimeFilter<"Application"> | Date | string
   }
@@ -5636,8 +5711,13 @@ export namespace Prisma {
     uniqueContribution?: SortOrderInput | SortOrder
     programGoals?: SortOrder
     financialAid?: SortOrder
+    annualIncome?: SortOrderInput | SortOrder
+    financialAidReason?: SortOrderInput | SortOrder
     commitmentSerious?: SortOrder
     commitmentDedicated?: SortOrder
+    status?: SortOrderInput | SortOrder
+    financialAidAmount?: SortOrderInput | SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5664,8 +5744,13 @@ export namespace Prisma {
     uniqueContribution?: StringNullableFilter<"Application"> | string | null
     programGoals?: StringFilter<"Application"> | string
     financialAid?: StringFilter<"Application"> | string
+    annualIncome?: StringNullableFilter<"Application"> | string | null
+    financialAidReason?: StringNullableFilter<"Application"> | string | null
     commitmentSerious?: BoolFilter<"Application"> | boolean
     commitmentDedicated?: BoolFilter<"Application"> | boolean
+    status?: StringNullableFilter<"Application"> | string | null
+    financialAidAmount?: StringNullableFilter<"Application"> | string | null
+    acceptedAt?: DateTimeNullableFilter<"Application"> | Date | string | null
     createdAt?: DateTimeFilter<"Application"> | Date | string
     updatedAt?: DateTimeFilter<"Application"> | Date | string
   }, "id">
@@ -5689,8 +5774,13 @@ export namespace Prisma {
     uniqueContribution?: SortOrderInput | SortOrder
     programGoals?: SortOrder
     financialAid?: SortOrder
+    annualIncome?: SortOrderInput | SortOrder
+    financialAidReason?: SortOrderInput | SortOrder
     commitmentSerious?: SortOrder
     commitmentDedicated?: SortOrder
+    status?: SortOrderInput | SortOrder
+    financialAidAmount?: SortOrderInput | SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ApplicationCountOrderByAggregateInput
@@ -5722,8 +5812,13 @@ export namespace Prisma {
     uniqueContribution?: StringNullableWithAggregatesFilter<"Application"> | string | null
     programGoals?: StringWithAggregatesFilter<"Application"> | string
     financialAid?: StringWithAggregatesFilter<"Application"> | string
+    annualIncome?: StringNullableWithAggregatesFilter<"Application"> | string | null
+    financialAidReason?: StringNullableWithAggregatesFilter<"Application"> | string | null
     commitmentSerious?: BoolWithAggregatesFilter<"Application"> | boolean
     commitmentDedicated?: BoolWithAggregatesFilter<"Application"> | boolean
+    status?: StringNullableWithAggregatesFilter<"Application"> | string | null
+    financialAidAmount?: StringNullableWithAggregatesFilter<"Application"> | string | null
+    acceptedAt?: DateTimeNullableWithAggregatesFilter<"Application"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Application"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Application"> | Date | string
   }
@@ -5904,8 +5999,13 @@ export namespace Prisma {
     uniqueContribution?: string | null
     programGoals: string
     financialAid: string
+    annualIncome?: string | null
+    financialAidReason?: string | null
     commitmentSerious: boolean
     commitmentDedicated: boolean
+    status?: string | null
+    financialAidAmount?: string | null
+    acceptedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5929,8 +6029,13 @@ export namespace Prisma {
     uniqueContribution?: string | null
     programGoals: string
     financialAid: string
+    annualIncome?: string | null
+    financialAidReason?: string | null
     commitmentSerious: boolean
     commitmentDedicated: boolean
+    status?: string | null
+    financialAidAmount?: string | null
+    acceptedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5954,8 +6059,13 @@ export namespace Prisma {
     uniqueContribution?: NullableStringFieldUpdateOperationsInput | string | null
     programGoals?: StringFieldUpdateOperationsInput | string
     financialAid?: StringFieldUpdateOperationsInput | string
+    annualIncome?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAidReason?: NullableStringFieldUpdateOperationsInput | string | null
     commitmentSerious?: BoolFieldUpdateOperationsInput | boolean
     commitmentDedicated?: BoolFieldUpdateOperationsInput | boolean
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAidAmount?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5979,8 +6089,13 @@ export namespace Prisma {
     uniqueContribution?: NullableStringFieldUpdateOperationsInput | string | null
     programGoals?: StringFieldUpdateOperationsInput | string
     financialAid?: StringFieldUpdateOperationsInput | string
+    annualIncome?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAidReason?: NullableStringFieldUpdateOperationsInput | string | null
     commitmentSerious?: BoolFieldUpdateOperationsInput | boolean
     commitmentDedicated?: BoolFieldUpdateOperationsInput | boolean
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAidAmount?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6004,8 +6119,13 @@ export namespace Prisma {
     uniqueContribution?: string | null
     programGoals: string
     financialAid: string
+    annualIncome?: string | null
+    financialAidReason?: string | null
     commitmentSerious: boolean
     commitmentDedicated: boolean
+    status?: string | null
+    financialAidAmount?: string | null
+    acceptedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6029,8 +6149,13 @@ export namespace Prisma {
     uniqueContribution?: NullableStringFieldUpdateOperationsInput | string | null
     programGoals?: StringFieldUpdateOperationsInput | string
     financialAid?: StringFieldUpdateOperationsInput | string
+    annualIncome?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAidReason?: NullableStringFieldUpdateOperationsInput | string | null
     commitmentSerious?: BoolFieldUpdateOperationsInput | boolean
     commitmentDedicated?: BoolFieldUpdateOperationsInput | boolean
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAidAmount?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6054,8 +6179,13 @@ export namespace Prisma {
     uniqueContribution?: NullableStringFieldUpdateOperationsInput | string | null
     programGoals?: StringFieldUpdateOperationsInput | string
     financialAid?: StringFieldUpdateOperationsInput | string
+    annualIncome?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAidReason?: NullableStringFieldUpdateOperationsInput | string | null
     commitmentSerious?: BoolFieldUpdateOperationsInput | boolean
     commitmentDedicated?: BoolFieldUpdateOperationsInput | boolean
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    financialAidAmount?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6258,6 +6388,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6282,8 +6423,13 @@ export namespace Prisma {
     uniqueContribution?: SortOrder
     programGoals?: SortOrder
     financialAid?: SortOrder
+    annualIncome?: SortOrder
+    financialAidReason?: SortOrder
     commitmentSerious?: SortOrder
     commitmentDedicated?: SortOrder
+    status?: SortOrder
+    financialAidAmount?: SortOrder
+    acceptedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6312,8 +6458,13 @@ export namespace Prisma {
     uniqueContribution?: SortOrder
     programGoals?: SortOrder
     financialAid?: SortOrder
+    annualIncome?: SortOrder
+    financialAidReason?: SortOrder
     commitmentSerious?: SortOrder
     commitmentDedicated?: SortOrder
+    status?: SortOrder
+    financialAidAmount?: SortOrder
+    acceptedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6337,8 +6488,13 @@ export namespace Prisma {
     uniqueContribution?: SortOrder
     programGoals?: SortOrder
     financialAid?: SortOrder
+    annualIncome?: SortOrder
+    financialAidReason?: SortOrder
     commitmentSerious?: SortOrder
     commitmentDedicated?: SortOrder
+    status?: SortOrder
+    financialAidAmount?: SortOrder
+    acceptedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6405,6 +6561,20 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type AllowedStudentCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -6459,6 +6629,10 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6558,6 +6732,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -6635,6 +6820,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
 

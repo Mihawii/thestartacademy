@@ -13,39 +13,56 @@ export default function ApplyPage() {
   const [mounted, setMounted] = useState(false);
   const isDark = theme === 'dark' || theme === undefined;
 
-  const [formData, setFormData] = useState({
-    // Personal Information
-    fullName: "",
-    email: "",
-    age: "",
-    location: "",
-    
-    // Education
-    currentEducation: "",
-    institution: "",
-    major: "",
-    graduationYear: "",
-    
-    // Experience
-    workExperience: "",
-    entrepreneurialExperience: "",
-    technicalSkills: "",
-    
-    // Essays
-    whyProgram: "",
-    careerGoals: "",
-    biggestChallenge: "",
-    uniqueContribution: "",
-    
-    
-    // Program Specific
-    programGoals: "",
-    financialAid: "",
-    
-    // Commitment
-    commitmentSerious: false,
-    commitmentDedicated: false
-  });
+  // Load saved form data from localStorage on component mount
+  const loadSavedFormData = () => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('tsa-application-form');
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (error) {
+          console.error('Error parsing saved form data:', error);
+        }
+      }
+    }
+    return {
+      // Personal Information
+      fullName: "",
+      email: "",
+      age: "",
+      location: "",
+      
+      // Education
+      currentEducation: "",
+      institution: "",
+      major: "",
+      graduationYear: "",
+      
+      // Experience
+      workExperience: "",
+      entrepreneurialExperience: "",
+      technicalSkills: "",
+      
+      // Essays
+      whyProgram: "",
+      careerGoals: "",
+      biggestChallenge: "",
+      uniqueContribution: "",
+      
+      
+      // Program Specific
+      programGoals: "",
+      financialAid: "",
+      annualIncome: "",
+      financialAidReason: "",
+      
+      // Commitment
+      commitmentSerious: false,
+      commitmentDedicated: false
+    };
+  };
+
+  const [formData, setFormData] = useState(loadSavedFormData);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -58,11 +75,26 @@ export default function ApplyPage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
+    
+    let newFormData;
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
-      setFormData(prev => ({ ...prev, [name]: checked }));
+      newFormData = {
+        ...formData,
+        [name]: checked
+      };
     } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
+      newFormData = {
+        ...formData,
+        [name]: value
+      };
+    }
+    
+    setFormData(newFormData);
+    
+    // Save to localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('tsa-application-form', JSON.stringify(newFormData));
     }
   };
 
@@ -94,7 +126,7 @@ export default function ApplyPage() {
       
       // Reset form and redirect after delay
       setTimeout(() => {
-        setFormData({
+        const emptyFormData = {
           fullName: "",
           email: "",
           age: "",
@@ -112,10 +144,19 @@ export default function ApplyPage() {
           uniqueContribution: "",
           programGoals: "",
           financialAid: "",
+          annualIncome: "",
+          financialAidReason: "",
           commitmentSerious: false,
           commitmentDedicated: false
-        });
+        };
+        setFormData(emptyFormData);
+        
+        // Clear localStorage after successful submission
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('tsa-application-form');
+        }
         setShowSuccess(false);
+        setIsSubmitting(false); // Ensure loading state is cleared
         // Redirect to homepage
         window.location.href = '/';
       }, 4000);
@@ -132,6 +173,7 @@ export default function ApplyPage() {
       }
       setShowErrorModal(true);
     } finally {
+      console.log('Setting isSubmitting to false');
       setIsSubmitting(false);
     }
   };
@@ -604,6 +646,69 @@ export default function ApplyPage() {
                     <option value="aid-required">I require financial aid to participate</option>
                   </select>
                 </div>
+
+                {/* Conditional Financial Aid Fields */}
+                {(formData.financialAid === 'aid-preferred' || formData.financialAid === 'aid-required') && (
+                  <div className={`space-y-6 mt-6 p-6 rounded-lg border ${
+                    isDark 
+                      ? 'bg-white/5 border-white/10' 
+                      : 'bg-white border-gray-200'
+                  }`}>
+                    <h3 className={`text-lg font-semibold ${
+                      isDark ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
+                      Financial Aid Information
+                    </h3>
+                    
+                    <div>
+                      <label className={`block text-sm font-medium mb-2 ${
+                        isDark ? 'text-gray-300' : 'text-gray-700'
+                      }`}>
+                        Annual Household Income (USD) *
+                      </label>
+                      <select
+                        name="annualIncome"
+                        value={formData.annualIncome}
+                        onChange={handleInputChange}
+                        required
+                        className={`w-full px-4 py-3 rounded-lg border ${
+                          isDark 
+                            ? 'bg-white/10 border-white/20 text-white' 
+                            : 'bg-white border-gray-300 text-gray-900'
+                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                      >
+                        <option value="">Select income range</option>
+                        <option value="under-25k">Under $25,000</option>
+                        <option value="25k-50k">$25,000 - $50,000</option>
+                        <option value="50k-75k">$50,000 - $75,000</option>
+                        <option value="75k-100k">$75,000 - $100,000</option>
+                        <option value="100k-150k">$100,000 - $150,000</option>
+                        <option value="over-150k">Over $150,000</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className={`block text-sm font-medium mb-2 ${
+                        isDark ? 'text-gray-300' : 'text-gray-700'
+                      }`}>
+                        Why do you deserve financial aid? * (100-200 words)
+                      </label>
+                      <textarea
+                        name="financialAidReason"
+                        value={formData.financialAidReason}
+                        onChange={handleInputChange}
+                        required
+                        rows={5}
+                        className={`w-full px-4 py-3 rounded-lg border ${
+                          isDark 
+                            ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
+                            : 'bg-white border-gray-300 text-gray-900'
+                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        placeholder="Explain your financial situation, how this program will impact your future, and why you deserve financial assistance..."
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 

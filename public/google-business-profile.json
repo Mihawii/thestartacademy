@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "The Start Academy",
+  "alternateName": "Старт Академия",
+  "description": "Premier business accelerator program offering opportunities for international high schoolers in Central Asia. Entrepreneurship training, project management, and startup mentorship.",
+  "url": "https://thestartacademy.com",
+  "telephone": "+77051028049",
+  "email": "olzhas@thestartacademy.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Astana Business District",
+    "addressLocality": "Astana",
+    "addressRegion": "Akmola Region",
+    "addressCountry": "Kazakhstan"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "51.1694",
+    "longitude": "71.4491"
+  },
+  "openingHours": "Mo-Fr 09:00-18:00",
+  "priceRange": "$$",
+  "category": ["Educational Institution", "Business Training", "Youth Program"],
+  "serviceArea": {
+    "@type": "Place",
+    "name": "Central Asia, Kazakhstan, International"
+  },
+  "hasOfferingCatalog": {
+    "@type": "OfferingCatalog",
+    "name": "Educational Programs",
+    "itemListElement": [
+      {
+        "@type": "Service",
+        "name": "High School Business Accelerator",
+        "description": "Comprehensive entrepreneurship program for international high school students",
+        "category": "Educational Service"
+      }
+    ]
+  }
+}

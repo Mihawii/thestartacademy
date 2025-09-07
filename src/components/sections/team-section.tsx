@@ -11,6 +11,13 @@ export const TeamSection: React.FC = () => {
       image: "/team/Olzhas.png"
     },
     {
+      name: "Alua Nurbayeva",
+      role: "Senior Mentor & Business Coach",
+      description: "PhD student at Nazarbayev University and professional business coach with extensive experience training executives at BI Group. Expert in strategic business development and leadership coaching.",
+      expertise: ["Business Coaching", "Strategic Development", "Executive Training", "Academic Research"],
+      image: "/team/Alua.png"
+    },
+    {
       name: "Khabibullokh Abdullakhonov",
       role: "Head of Operations",
       description: "Operations expert with deep experience in scaling educational programs and managing complex organizational systems.",
@@ -19,16 +26,16 @@ export const TeamSection: React.FC = () => {
     },
     {
       name: "Jamshidbek Nazaraliev",
-      role: "Director of Education",
-      description: "Educational innovator focused on creating transformative learning experiences for young entrepreneurs and business leaders.",
-      expertise: ["Educational Innovation", "Curriculum Design", "Student Development"],
+      role: "Regional Founder - Uzbekistan",
+      description: "Regional founder leading The Start Academy's expansion in Uzbekistan. Educational innovator focused on creating transformative learning experiences for young entrepreneurs across Central Asia.",
+      expertise: ["Regional Leadership", "Educational Innovation", "Curriculum Design", "Market Expansion"],
       image: "/team/Jamshid.JPG"
     },
     {
       name: "Alisa Shcherbak",
-      role: "Head of Student Success",
-      description: "Student success specialist dedicated to ensuring every participant achieves their full potential through personalized support and mentorship.",
-      expertise: ["Student Mentoring", "Success Coaching", "Personal Development"],
+      role: "Regional Founder - Ukraine",
+      description: "Regional founder spearheading The Start Academy's operations in Ukraine. Student success specialist dedicated to ensuring every participant achieves their full potential through personalized support and mentorship.",
+      expertise: ["Regional Leadership", "Student Mentoring", "Success Coaching", "Program Development"],
       image: "/team/Alisa.png"
     }
   ];

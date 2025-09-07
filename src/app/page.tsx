@@ -20,12 +20,12 @@ export default function Home() {
   return (
     <ErrorBoundary>
       <Head>
-        <title>The Start Academy | #1 High School Business Accelerator | Entrepreneurship Program</title>
-        <meta name="description" content="Central Asia's premier accelerator program for high schoolers interested in entrepreneurship and project management. Real-world business skills, startup experience, and expert mentorship. Transform your ideas into reality." />
+        <title>The Start Academy</title>
+        <meta name="description" content="The Start Academy offers exceptional opportunities for international high schoolers in Central Asia's premier business accelerator program. Entrepreneurship training, project management, startup experience, and expert mentorship. Transform your business ideas into reality with our exclusive program for ambitious students worldwide." />
         <meta name="keywords" content="the start academy, start academy, the start, start, high school business accelerator, entrepreneurship program for high schoolers, project management for teenagers, business training for high school students, startup accelerator for youth, teen entrepreneur program, opportunities for international high schoolers, full ride summer program alternative, business accelerator program, startup mentorship for teens" />
-        <meta property="og:title" content="The Start Academy | #1 High School Business Accelerator Program" />
+        <meta property="og:title" content="The Start Academy" />
         <meta property="og:description" content="Central Asia's premier accelerator program for high schoolers interested in entrepreneurship and project management. Real-world business skills and startup experience." />
-        <meta name="twitter:title" content="The Start Academy | High School Business Accelerator Program" />
+        <meta name="twitter:title" content="The Start Academy" />
         <meta name="twitter:description" content="Premier accelerator program for high schoolers interested in entrepreneurship and project management. Transform your business ideas into reality." />
         <link rel="canonical" href="https://thestartacademy.com" />
       </Head>

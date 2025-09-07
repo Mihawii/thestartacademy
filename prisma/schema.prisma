@@ -47,8 +47,13 @@ model Application {
   uniqueContribution       String?
   programGoals             String
   financialAid             String
+  annualIncome             String?
+  financialAidReason       String?
   commitmentSerious        Boolean
   commitmentDedicated      Boolean
+  status                   String?  @default("pending")
+  financialAidAmount       String?
+  acceptedAt               DateTime?
   createdAt                DateTime @default(now())
   updatedAt                DateTime @updatedAt
 
