@@ -3,18 +3,31 @@
 import React from "react";
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import HeroSection from "@/components/sections/hero-section";
-import { StaggerTestimonials } from "@/components/blocks/stagger-testimonials";
+const HeroSection = dynamic(() => import('@/components/sections/hero-section'), {
+  loading: () => <div className="h-screen bg-gradient-to-br from-gray-900 to-black" />
+});
+const AboutSection = dynamic(() => import('@/components/sections/about-section').then(mod => mod.AboutSection), {
+  loading: () => <div className="h-96 bg-white" />
+});
+const ProgramOverviewSection = dynamic(() => import('@/components/sections/program-overview-section').then(mod => mod.ProgramOverviewSection), {
+  loading: () => <div className="h-96 bg-gray-50" />
+});
+const PluraAISection = dynamic(() => import('@/components/sections/plura-ai-section').then(mod => mod.PluraAISection), {
+  loading: () => <div className="h-96 bg-white" />
+});
+const ImportantDatesSection = dynamic(() => import('@/components/sections/important-dates-section').then(mod => ({ default: mod.ImportantDatesSection })), { 
+  ssr: false,
+  loading: () => <div className="h-64 bg-gray-50" />
+});
+const StaggerTestimonials = dynamic(() => import('@/components/blocks/stagger-testimonials').then(mod => mod.StaggerTestimonials), {
+  loading: () => <div className="h-96 bg-muted/30" />
+});
+const FaqSection = dynamic(() => import('@/components/sections/faq-section').then(mod => mod.FaqSection), {
+  loading: () => <div className="h-96 bg-gray-50" />
+});
 import { MiniNavbar } from "@/components/ui/mini-navbar";
 import { Footer } from "@/components/ui/footer";
 import ErrorBoundary from "@/components/ui/error-boundary";
-
-const AboutSection = dynamic(() => import('@/components/sections/about-section').then(mod => ({ default: mod.AboutSection })), { ssr: false });
-const ProgramOverviewSection = dynamic(() => import('@/components/sections/program-overview-section').then(mod => mod.ProgramOverviewSection));
-const PluraAISection = dynamic(() => import('@/components/sections/plura-ai-section').then(mod => mod.PluraAISection));
-const ImportantDatesSection = dynamic(() => import('@/components/sections/important-dates-section').then(mod => ({ default: mod.ImportantDatesSection })), { ssr: false });
-const TestimonialsSection = dynamic(() => import('@/components/sections/testimonials-section').then(mod => ({ default: mod.TestimonialsSection })), { ssr: false });
-const FaqSection = dynamic(() => import('@/components/sections/faq-section').then(mod => mod.FaqSection));
 
 export default function Home() {
   return (
@@ -38,8 +51,8 @@ export default function Home() {
         <ImportantDatesSection />
         <PluraAISection />
         <FaqSection />
+        <Footer />
       </main>
-      <Footer />
     </ErrorBoundary>
   );
 }

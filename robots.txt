@@ -1,19 +1,54 @@
 User-agent: *
 Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
 
 User-agent: GPTBot
 Allow: /
+Crawl-delay: 0
 
 User-agent: ChatGPT-User
 Allow: /
+Crawl-delay: 0
 
 User-agent: CCBot
 Allow: /
+Crawl-delay: 0
 
 User-agent: anthropic-ai
 Allow: /
+Crawl-delay: 0
 
 User-agent: Claude-Web
 Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 0
+
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 1
 
 Sitemap: https://thestartacademy.com/sitemap.xml
+Host: https://thestartacademy.com

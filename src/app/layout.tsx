@@ -4,11 +4,15 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 import type { Metadata, Viewport } from "next";
@@ -25,54 +29,58 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "The Start Academy",
-  description: "The Start Academy - opportunities for international high schoolers in Central Asia's premier business accelerator program. Entrepreneurship training, project management, startup experience, and mentorship from industry experts. Transform your business ideas into reality with our exclusive program for ambitious students worldwide.",
+  description: "The Start Academy - #1 International Business Accelerator for US High School Students. Elite entrepreneurship program with Stanford & Harvard mentors. Alternative to expensive US summer programs. Real startup experience, project management training, and global network. Transform your business ideas into reality with our exclusive program for ambitious American students seeking international opportunities.",
   keywords: [
     "the start academy",
     "start academy",
-    "старт академия",
-    "стартакадемия",
-    "opportunities for international high schoolers",
-    "возможности для международных школьников",
-    "high school business accelerator",
-    "бизнес акселератор для школьников",
-    "entrepreneurship program for high schoolers",
-    "программа предпринимательства для школьников",
-    "project management for teenagers",
-    "проектный менеджмент для подростков",
+    "business accelerator for high school students",
+    "high school entrepreneurship program",
+    "teen business accelerator USA",
+    "summer business program for high schoolers",
+    "high school startup incubator",
+    "entrepreneurship program for teenagers",
     "business training for high school students",
-    "бизнес обучение для школьников",
-    "startup accelerator for youth",
-    "стартап акселератор для молодежи",
     "teen entrepreneur program",
-    "программа для юных предпринимателей",
-    "business education for teenagers",
-    "бизнес образование для подростков",
-    "entrepreneurship training for students",
-    "обучение предпринимательству для студентов",
-    "business accelerator program",
-    "программа бизнес акселератора",
-    "startup mentorship for teens",
-    "менторство стартапов для подростков",
-    "business skills for high schoolers",
-    "бизнес навыки для школьников",
-    "entrepreneurship education program",
-    "программа предпринимательского образования",
-    "business accelerator central asia",
-    "бизнес акселератор центральная азия",
-    "entrepreneurship central asia",
-    "предпринимательство центральная азия",
-    "kazakhstan business program",
-    "бизнес программа казахстан",
-    "astana startup program",
-    "стартап программа астана",
-    "international student opportunities",
-    "возможности для международных студентов",
-    "summer business program",
-    "летняя бизнес программа",
-    "youth leadership development",
-    "развитие лидерства молодежи",
-    "teen startup incubator",
-    "инкубатор стартапов для подростков"
+    "high school business education",
+    "startup accelerator for youth",
+    "business mentorship for teenagers",
+    "entrepreneurship education for high schoolers",
+    "teen startup program",
+    "high school business camp",
+    "youth entrepreneurship training",
+    "business accelerator program for teens",
+    "high school innovation program",
+    "teen business development program",
+    "entrepreneurship summer program",
+    "business leadership for high schoolers",
+    "startup education for teenagers",
+    "high school venture capital program",
+    "teen business competition",
+    "entrepreneurship bootcamp for high schoolers",
+    "business accelerator alternative",
+    "international business program for US students",
+    "global entrepreneurship program",
+    "overseas business education",
+    "international startup experience",
+    "study abroad business program",
+    "global business accelerator",
+    "international teen entrepreneur program",
+    "overseas startup incubator",
+    "global business mentorship",
+    "international entrepreneurship training",
+    "business program abroad for high schoolers",
+    "global startup accelerator for teens",
+    "international business education for teenagers",
+    "alternative to expensive US summer programs",
+    "affordable international business program",
+    "stanford mentor program",
+    "harvard business program for high schoolers",
+    "ivy league mentor program",
+    "elite business accelerator",
+    "prestigious entrepreneurship program",
+    "top tier business education",
+    "exclusive startup program",
+    "selective business accelerator"
   ],
   authors: [{ name: "The Start Academy" }],
   creator: "The Start Academy",
@@ -94,7 +102,7 @@ export const metadata: Metadata = {
     url: 'https://thestartacademy.com',
     siteName: 'The Start Academy',
     title: 'The Start Academy',
-    description: 'Central Asia\'s premier accelerator program for high schoolers interested in entrepreneurship and project management. Real-world business skills, startup experience, and expert mentorship.',
+    description: '#1 International Business Accelerator for US High School Students. Elite entrepreneurship program with Stanford & Harvard mentors. Alternative to expensive US summer programs with global perspective and real startup experience.',
     images: [
       {
         url: '/logo/logo.svg',
@@ -106,8 +114,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Start Academy | High School Business Accelerator Program',
-    description: 'Premier accelerator program for high schoolers interested in entrepreneurship and project management. Transform your business ideas into reality.',
+    title: 'The Start Academy | #1 International Business Accelerator for US High Schoolers',
+    description: 'Elite international business accelerator for American high school students. Stanford & Harvard mentors. Alternative to expensive US summer programs. Real startup experience abroad.',
     images: ['/logo/logo.svg'],
   },
   verification: {
@@ -134,14 +142,23 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://thestartacademy.com" />
+        <link rel="preload" href="/logo/logo.svg" as="image" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico?v=3" type="image/x-icon" />
         <link rel="shortcut icon" href="/favicon.ico?v=3" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/favicon.ico?v=3" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
+        <link rel="alternate" hrefLang="en-US" href="https://thestartacademy.com" />
         <link rel="alternate" hrefLang="en" href="https://thestartacademy.com" />
         <link rel="alternate" hrefLang="ru" href="https://thestartacademy.com/ru" />
         <link rel="alternate" hrefLang="x-default" href="https://thestartacademy.com" />
+        <meta name="geo.region" content="US" />
+        <meta name="geo.placename" content="United States" />
+        <meta name="geo.position" content="39.8283;-98.5795" />
+        <meta name="ICBM" content="39.8283, -98.5795" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -150,16 +167,38 @@ export default function RootLayout({
               "@type": "EducationalOrganization",
               "name": "The Start Academy",
               "alternateName": ["Start Academy", "Старт Академия"],
-              "description": "Central Asia's premier business accelerator program for high school students interested in entrepreneurship and project management",
+              "description": "#1 International Business Accelerator for US High School Students. Elite entrepreneurship program with Stanford & Harvard mentors. Alternative to expensive US summer programs with global perspective.",
               "url": "https://thestartacademy.com",
               "logo": "https://thestartacademy.com/logo/logo.svg",
               "image": "https://thestartacademy.com/logo/logo.svg",
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "KZ",
-                "addressLocality": "Astana",
-                "addressRegion": "Akmola Region"
-              },
+              "address": [
+                {
+                  "@type": "PostalAddress",
+                  "addressCountry": "KZ",
+                  "addressLocality": "Astana",
+                  "addressRegion": "Akmola Region"
+                },
+                {
+                  "@type": "PostalAddress",
+                  "addressCountry": "US",
+                  "addressLocality": "New York",
+                  "addressRegion": "NY"
+                }
+              ],
+              "areaServed": [
+                {
+                  "@type": "Country",
+                  "name": "United States"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Canada"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Kazakhstan"
+                }
+              ],
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+77051028049",
@@ -172,7 +211,7 @@ export default function RootLayout({
                 "itemListElement": [{
                   "@type": "Course",
                   "name": "High School Business Accelerator Program",
-                  "description": "Comprehensive entrepreneurship and project management training for international high school students",
+                  "description": "Elite international business accelerator program for US high school students seeking global entrepreneurship experience with Stanford & Harvard mentors",
                   "provider": {
                     "@type": "EducationalOrganization",
                     "name": "The Start Academy"
@@ -187,7 +226,7 @@ export default function RootLayout({
                   }
                 }]
               },
-              "keywords": "opportunities for international high schoolers, start academy, business accelerator, entrepreneurship program, high school students, Central Asia, Kazakhstan, Astana"
+              "keywords": "business accelerator for high school students, teen entrepreneurship program USA, summer business program alternative, international startup experience, Stanford Harvard mentors, elite business education, high school innovation program"
             })
           }}
         />
